@@ -1,0 +1,26 @@
+﻿<Window x:Class="WPF_POS.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_POS"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel HorizontalAlignment="Left" Height="414" Margin="10,0,0,0" VerticalAlignment="Center" Width="101">
+            <Button Content="Home" Height="41" Width="99"/>
+            <Button Content="Products" Height="41" Width="99"/>
+            <Button Content="Search Products" Height="41" Width="99"/>
+            <Button Content="Stockin" Height="41" Width="99"/>
+            <Button Content="Purchase Order" Height="41" Width="99"/>
+            <Button Content="Category" Height="41" Width="99"/>
+            <Button Content="Supplier" Height="41" Width="99"/>
+            <Button Content="User" Height="41" Width="99" Click="btnUserClick"/>
+            <Button Content="Sales Report" Height="41" Width="99"/>
+            <Button Content="Inventory Report" Height="41" Width="99"/>
+        </StackPanel>
+
+        <Frame x:Name="Main" Content="Frame" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Height="414" Margin="116,0,0,0" VerticalAlignment="Center" Width="674"/>
+
+    </Grid>
+</Window>
