@@ -27,9 +27,50 @@ namespace WPF_POS
             InitializeComponent();
         }
 
+
+
+        private void btnHomeClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnProductClick(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new ProductForm();
+        }
+
+        private void btnStockinClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnPurchaseOrderClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCategoryClick(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new ProductForm();
+        }
+
+        private void btnSupplierClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void btnUserClick(object sender, RoutedEventArgs e)
         {
             Main.Content = new UserForm();
         }
+
+        private void btnSalesReportClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnInventoryReportClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
-}

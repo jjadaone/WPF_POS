@@ -8,19 +8,19 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <StackPanel HorizontalAlignment="Left" Height="414" Margin="10,0,0,0" VerticalAlignment="Center" Width="101">
-            <Button Content="Home" Height="41" Width="99"/>
-            <Button Content="Products" Height="41" Width="99"/>
-            <Button Content="Search Products" Height="41" Width="99"/>
-            <Button Content="Stockin" Height="41" Width="99"/>
-            <Button Content="Purchase Order" Height="41" Width="99"/>
-            <Button Content="Category" Height="41" Width="99"/>
-            <Button Content="Supplier" Height="41" Width="99"/>
+            <Button Content="Home" Height="41" Width="99" Click="btnHomeClick" />
+            <Button Content="Products" Height="41" Width="99" Click="btnProductClick" />
+            <Button Content="Search Products" Height="41" Width="99" Click="Button_Click"/>
+            <Button Content="Stockin" Height="41" Width="99" Click="btnStockinClick" />
+            <Button Content="Purchase Order" Height="41" Width="99" Click="btnPurchaseOrderClick"/>
+            <Button Content="Category" Height="41" Width="99" Click="btnCategoryClick"/>
+            <Button Content="Supplier" Height="41" Width="99" Click="btnSupplierClick"/>
             <Button Content="User" Height="41" Width="99" Click="btnUserClick"/>
-            <Button Content="Sales Report" Height="41" Width="99"/>
-            <Button Content="Inventory Report" Height="41" Width="99"/>
+            <Button Content="Sales Report" Height="41" Width="99" Click="btnSalesReportClick"/>
+            <Button Content="Inventory Report" Height="41" Width="99" Click="btnInventoryReportClick" />
         </StackPanel>
 
-        <Frame x:Name="Main" Content="Frame" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Height="414" Margin="116,0,0,0" VerticalAlignment="Center" Width="674"/>
+        <Frame x:Name="Main" Content="" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Height="414" Margin="116,0,0,0" VerticalAlignment="Center" Width="674"/>
 
     </Grid>
 </Window>
