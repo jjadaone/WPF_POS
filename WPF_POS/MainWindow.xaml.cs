@@ -51,7 +51,7 @@ namespace WPF_POS
 
         private void btnCategoryClick(object sender, RoutedEventArgs e)
         {
-            Main.Content = new ProductForm();
+            Main.Content = new CategoryForm();
         }
 
         private void btnSupplierClick(object sender, RoutedEventArgs e)
@@ -73,4 +73,14 @@ namespace WPF_POS
         {
 
         }
+
+        private void Main_Navigated(object sender, NavigationEventArgs e)
+        {
+
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
+}

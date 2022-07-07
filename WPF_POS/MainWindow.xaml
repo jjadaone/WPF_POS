@@ -20,7 +20,7 @@
             <Button Content="Inventory Report" Height="41" Width="99" Click="btnInventoryReportClick" />
         </StackPanel>
 
-        <Frame x:Name="Main" Content="" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Height="414" Margin="116,0,0,0" VerticalAlignment="Center" Width="674"/>
+        <Frame x:Name="Main" Content="" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Height="414" Margin="116,0,0,0" VerticalAlignment="Center" Width="674" Navigated="Main_Navigated"/>
 
     </Grid>
 </Window>
