@@ -39,6 +39,11 @@ namespace WPF_POS
             Main.Content = new ProductForm();
         }
 
+        private void btnSearchClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void btnStockinClick(object sender, RoutedEventArgs e)
         {
 
@@ -74,3 +79,4 @@ namespace WPF_POS
 
         }
     }
+}
