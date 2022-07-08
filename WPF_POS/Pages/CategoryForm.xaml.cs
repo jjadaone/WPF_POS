@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace WPF_POS.Pages
 {
@@ -23,6 +25,125 @@ namespace WPF_POS.Pages
         public CategoryForm()
         {
             InitializeComponent();
+            loadData();
+        }
+        SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+        public void loadData()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT * FROM tblcategory", con);
+            DataTable dt = new DataTable();
+            con.Open();
+            SqlDataReader sdr = cmd.ExecuteReader();
+            dt.Load(sdr);
+            con.Close();
+            DataGrid.ItemsSource = dt.DefaultView;
+
+        }
+        public void clearData()
+        {
+            txtCategory.Clear();
+            txtDesc.Clear();
+            txtCategoryid.Clear();
+
+        }
+
+        public bool isValid()
+        {
+            if (txtCategory.Text == String.Empty)
+            {
+                MessageBox.Show("Category Name is required", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (txtDesc.Text == String.Empty)
+            {
+                MessageBox.Show("Category Description is required", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            return true;
+        }
+
+        private void AddDescBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (isValid())
+                {
+                    SqlCommand cmd = new SqlCommand("INSERT INTO tblcategory VALUES (@category_name, @category_desc)", con);
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@category_name", txtCategory.Text);
+                    cmd.Parameters.AddWithValue("@category_desc", txtDesc.Text);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    loadData();
+                    MessageBox.Show("Successfully Entered", "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
+                    clearData();
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        
+
+        private void deleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DataRowView row = DataGrid.SelectedItem as DataRowView;
+                string id = row.Row.ItemArray[0].ToString();
+
+                SqlCommand cmd = new SqlCommand("DELETE FROM tblcategory WHERE category_id=" + id, con);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+                MessageBox.Show("Deleted successfully");
+                loadData();
+                clearData();
+                con.Close();
+
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Not Deleted" + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+            //int id = dataGridBasket.SelectedIndex;
+            //DataRowView row = dataGridBasket.SelectedItem as DataRowView;
+            //MessageBox.Show(id.ToString(), row.Row.ItemArray[0].ToString());
+
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            con.Open();
+            SqlCommand cmd = new SqlCommand("update tblcategory set category_name = '" + txtCategory.Text + "', category_desc = '" + txtDesc.Text + "' WHERE category_id = '" + txtCategoryid.Text + "' ", con);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Category updated successfully", "Updated", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                con.Close();
+                clearData();
+                loadData();
+               
+
+            }
         }
     }
 }
