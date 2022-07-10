@@ -13,12 +13,14 @@
             <Button Content="Calculate Total" HorizontalAlignment="Left" Height="33" Margin="22,9,0,0" VerticalAlignment="Top" Width="195" Click="btnCalculateClick"/>
         </Border>
         <Label Content="Total Price:" HorizontalAlignment="Left" Height="29" Margin="28,89,0,0" VerticalAlignment="Top" Width="77"/>
-        <TextBox x:Name="total" HorizontalAlignment="Left" Height="29" Margin="110,89,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="113"/>
+        <TextBox IsReadOnly="True" x:Name="total" HorizontalAlignment="Left" Height="29" Margin="110,89,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="113"/>
         <Label Content="Cash:" HorizontalAlignment="Left" Height="29" Margin="28,118,0,0" VerticalAlignment="Top" Width="77"/>
-        <TextBox x:Name="balance" HorizontalAlignment="Left" Height="29" Margin="110,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="113"/>
+        <TextBox x:Name="cash" HorizontalAlignment="Left" Height="29" Margin="110,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="113"/>
+        <TextBox x:Name="balance" HorizontalAlignment="Left" Height="29" Margin="85,242,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="113"/>
         <Button Content="Change" HorizontalAlignment="Left" Margin="20,175,0,0" VerticalAlignment="Top" Width="64" Height="44" Click="btnChangeClick"/>
         <Button Content="Submit" HorizontalAlignment="Left" Margin="94,175,0,0" VerticalAlignment="Top" Width="64" Height="44" RenderTransformOrigin="2.578,0.671" Click="btnSubmitClick"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="166,175,0,0" VerticalAlignment="Top" Width="64" Height="44" Click="btnCancelClick"/>
+        <Button Content="Print Receipt" HorizontalAlignment="Left" Height="32" Margin="74,316,0,0" VerticalAlignment="Top" Width="100" Click="btnPrintClick"/>
 
     </Grid>
 </Window>
