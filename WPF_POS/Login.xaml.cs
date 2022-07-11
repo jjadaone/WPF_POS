@@ -33,19 +33,24 @@ namespace WPF_POS
         {
             try
             {
-                string sql = "SELECT ^ FROM tbluser WHERE username=@username AND password=@password";
+                string sql = @"SELECT * FROM tbluser WHERE username=@username AND password=@password";
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.CommandType = CommandType.Text;
-                MessageBox.Show("in");
                 cmd.Parameters.AddWithValue("@username", username.Text);
                 cmd.Parameters.AddWithValue("@password", password.Text);
+                con.Open();
+                //MessageBox.Show(username.Text, password.Text);
+
+                //cmd.ExecuteNonQuery();
                 int user_id = Convert.ToInt32(cmd.ExecuteScalar());
+
 
                 if (user_id != 0)
                 {
-                    Close();
+                    this.Close();
                     sales.Show();
-                } else
+                }
+                else
                 {
                     MessageBox.Show("Invalid username and password");
                 }
@@ -55,6 +60,10 @@ namespace WPF_POS
             catch
             {
                 MessageBox.Show("Error login");
+            }
+            finally
+            {
+                con.Close();
             }
         }
     }

@@ -21,6 +21,7 @@
         <Button Content="Submit" HorizontalAlignment="Left" Margin="94,175,0,0" VerticalAlignment="Top" Width="64" Height="44" RenderTransformOrigin="2.578,0.671" Click="btnSubmitClick"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="166,175,0,0" VerticalAlignment="Top" Width="64" Height="44" Click="btnCancelClick"/>
         <Button Content="Print Receipt" HorizontalAlignment="Left" Height="32" Margin="74,316,0,0" VerticalAlignment="Top" Width="100" Click="btnPrintClick"/>
+        <Button Content="Void" HorizontalAlignment="Left" Height="38" Margin="56,391,0,0" VerticalAlignment="Top" Width="86" Click="btnRemoveClick"/>
 
     </Grid>
 </Window>

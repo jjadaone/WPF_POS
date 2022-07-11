@@ -46,7 +46,7 @@ namespace WPF_POS
 
         private void btnStockinClick(object sender, RoutedEventArgs e)
         {
-
+            Main.Content = new StockinForm();
         }
 
         private void btnPurchaseOrderClick(object sender, RoutedEventArgs e)
@@ -76,7 +76,7 @@ namespace WPF_POS
 
         private void btnInventoryReportClick(object sender, RoutedEventArgs e)
         {
-
+            Main.Content = new Refund();
         }
 
         private void Main_Navigated(object sender, NavigationEventArgs e)

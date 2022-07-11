@@ -157,10 +157,10 @@ namespace WPF_POS
                 cmd.Parameters.AddWithValue("@cash", cash.Text);
                 cmd.Parameters.AddWithValue("@balance", balance.Text);
                 con.Open();
-                MessageBox.Show(DateTime.Now.ToString() +" "+total.Text+" "+cash.Text+" "+balance.Text);
+                //MessageBox.Show(DateTime.Now.ToString() +" "+total.Text+" "+cash.Text+" "+balance.Text);
                 int order_id = Convert.ToInt32(cmd.ExecuteScalar());
                 cmd.Parameters.Clear();
-                MessageBox.Show(order_id.ToString());
+                //MessageBox.Show(order_id.ToString());
                 if (order_id != 0)
                 {
                     foreach (var order in model)
@@ -235,6 +235,21 @@ namespace WPF_POS
 
             MessageBox.Show(sb.ToString());
 
+        }
+
+        private void btnRemoveClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DataRowView row = products.SelectedItem as DataRowView;
+                int order_id = Convert.ToInt32(row.Row.ItemArray[0]);
+
+                model.RemoveAt(order_id);
+            }
+            catch
+            {
+                MessageBox.Show("Error");
+            }
         }
     }
 }
