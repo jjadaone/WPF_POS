@@ -1,0 +1,20 @@
+﻿<Page x:Class="WPF_POS.Pages.StockinForm"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF_POS.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="StockinForm">
+
+    <Grid>
+        <Label Content="ORDERS" HorizontalAlignment="Left" Height="36" Margin="26,7,0,0" VerticalAlignment="Top" Width="246" FontWeight="Bold" FontSize="25"/>
+        <DataGrid x:Name="orders" HorizontalAlignment="Center" Height="172" Margin="0,48,0,0" VerticalAlignment="Top" Width="748" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <Label Content="RECEIVED" HorizontalAlignment="Left" Height="36" Margin="26,234,0,0" VerticalAlignment="Top" Width="246" FontWeight="Bold" FontSize="25"/>
+        <DataGrid x:Name="received" HorizontalAlignment="Center" Height="172" Margin="0,275,0,0" VerticalAlignment="Top" Width="748" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <Button Content="Save" HorizontalAlignment="Left" Height="36" Margin="480,234,0,0" VerticalAlignment="Top" Width="144" Click="btnSaveClick"/>
+        <Button Content="Clear" HorizontalAlignment="Left" Height="36" Margin="630,234,0,0" VerticalAlignment="Top" Width="144" Click="btnClearClick"/>
+
+    </Grid>
+</Page>

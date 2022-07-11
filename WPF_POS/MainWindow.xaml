@@ -10,7 +10,7 @@
         <StackPanel HorizontalAlignment="Left" Height="414" Margin="10,0,0,0" VerticalAlignment="Center" Width="101">
             <Button Content="Home" Height="41" Width="99" Click="btnHomeClick" />
             <Button Content="Products" Height="41" Width="99" Click="btnProductClick" />
-            <Button Content="Search Products" Height="41" Width="99" Click="Button_Click"/>
+            <Button Content="Search Products" Height="41" Width="99" Click="btnSearchClick"/>
             <Button Content="Stockin" Height="41" Width="99" Click="btnStockinClick" />
             <Button Content="Purchase Order" Height="41" Width="99" Click="btnPurchaseOrderClick"/>
             <Button Content="Category" Height="41" Width="99" Click="btnCategoryClick"/>

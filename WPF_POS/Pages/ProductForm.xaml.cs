@@ -30,8 +30,10 @@ namespace WPF_POS.Pages
             fill_combo();
             PID_combo();
         }
-        SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        
+        SqlConnection con = new SqlConnection(@"Data Source=(localdb)\ProjectModels;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
+<<<<<<< HEAD
         public void clearData()
         {
             txtProduct.Clear();
@@ -41,6 +43,8 @@ namespace WPF_POS.Pages
             txtCategoryID.Clear();
 
         }
+=======
+>>>>>>> 974142fcae4f65febeaa0f84640b8567278fbc14
         private void CBCat_DropDownClosed(object sender, EventArgs e)
         {
             try
