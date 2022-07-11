@@ -46,7 +46,7 @@ namespace WPF_POS
 
         private void btnPurchaseOrderClick(object sender, RoutedEventArgs e)
         {
-
+            Main.Content = new PurchaseOrderForm();
         }
 
         private void btnCategoryClick(object sender, RoutedEventArgs e)
@@ -56,7 +56,7 @@ namespace WPF_POS
 
         private void btnSupplierClick(object sender, RoutedEventArgs e)
         {
-
+            Main.Content = new SupplierForm();
         }
 
         private void btnUserClick(object sender, RoutedEventArgs e)
@@ -82,5 +82,6 @@ namespace WPF_POS
         {
             
         }
+      
     }
 }

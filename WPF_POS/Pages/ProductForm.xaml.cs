@@ -28,10 +28,19 @@ namespace WPF_POS.Pages
             InitializeComponent();
             loadData();
             fill_combo();
+            PID_combo();
         }
         SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
-       
+        public void clearData()
+        {
+            txtProduct.Clear();
+            txtDesc.Clear();
+            txtPrice.Clear();
+            txtQty.Clear();
+            txtCategoryID.Clear();
+
+        }
         private void CBCat_DropDownClosed(object sender, EventArgs e)
         {
             try
@@ -40,9 +49,9 @@ namespace WPF_POS.Pages
                 SqlCommand cmd = new SqlCommand("select * FROM tblcategory where category_name ='" + CBCat.Text+"' ", con);
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
-                { 
-                    string id = dr.GetInt32(0).ToString();
-                    txtCategoryID.Text = id;
+                {
+                    string cid = dr.GetInt32(0).ToString();
+                    txtCategoryID.Text = cid;
 
                 }
                 con.Close();
@@ -63,13 +72,73 @@ namespace WPF_POS.Pages
                 SqlDataReader dr = cmd.ExecuteReader();
                 while(dr.Read())
                 {
-                    string name = dr.GetString(1);
-                    CBCat.Items.Add(name);
+                    
+                    string cname = dr.GetString(1);
+                    CBCat.Items.Add(cname);
                     
                 }
                 con.Close();
             }
             catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+        private void CBPID_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+        }
+
+        private void CBPID_DropDownClosed(object sender, EventArgs e)
+        {
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("select * FROM tblproduct where product_id ='" + CBPID.Text + "' ", con);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    string cid = dr.GetInt32(1).ToString();
+                    CBCat.Text = cid;
+
+                    string prname = dr.GetString(2);
+                    txtProduct.Text = prname;
+                    string desc = dr.GetString(3);
+                    txtDesc.Text = desc;
+                    string pquantity = dr.GetInt32(4).ToString();
+                    txtQty.Text = pquantity;
+
+                    string pprice = dr.GetDouble(5).ToString();
+                    txtPrice.Text = pprice;
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+        }
+        void PID_combo()
+        {
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("select * FROM tblproduct", con);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    string pid = dr.GetInt32(0).ToString();
+                    CBPID.Items.Add(pid);
+                    
+
+
+                }
+                con.Close();
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -85,14 +154,7 @@ namespace WPF_POS.Pages
             con.Close();
             DataGrid.ItemsSource = dt.DefaultView;
         }
-        public void clearData()
-        {
-            txtProduct.Clear();
-            txtDesc.Clear();
-            txtPrice.Clear();   
-            txtQty.Clear();
-            CBCat.Items.Clear();
-        }
+
         public bool isValid()
         {
             if (txtProduct.Text == String.Empty)
@@ -149,8 +211,8 @@ namespace WPF_POS.Pages
                     con.Open();
                     cmd.ExecuteNonQuery();
                     con.Close();
-                    loadData();
                     MessageBox.Show("Successfully Entered", "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
+                    loadData();
                     clearData();
                 }
             }
@@ -185,6 +247,38 @@ namespace WPF_POS.Pages
             {
                 con.Close();
             }
+        }
+
+        private void UpdateProdBtn_Click(object sender, RoutedEventArgs e)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("update tblproduct set product_name = '" + txtProduct.Text + "', product_description = '" + txtDesc.Text + "', product_quantity = '" + txtQty.Text + "', sales_price = '" + txtPrice.Text + "' WHERE product_id = '" + CBPID.Text + "' ", con);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Category updated successfully", "Updated", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                con.Close();
+                clearData();
+                loadData();
+
+
+            }
+
+        }
+
+        private void ClrBtn_Click(object sender, RoutedEventArgs e)
+        {
+            clearData();
+
         }
     }
 }

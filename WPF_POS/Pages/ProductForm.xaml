@@ -10,22 +10,28 @@
       Title="ProductForm">
 
     <Grid>
-        <Label x:Name="lblProductName" Content="Product:" HorizontalAlignment="Left" Margin="30,69,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="CBCat" HorizontalAlignment="Left" Margin="110,33,0,0" VerticalAlignment="Top" Width="120" DropDownClosed="CBCat_DropDownClosed"/>
-        <TextBox x:Name="txtProduct" HorizontalAlignment="Left" Margin="110,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="26"/>
-        <Label x:Name="lblCategory" Content="Category:" HorizontalAlignment="Left" Margin="30,33,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblProductDesc" Content="Description:" HorizontalAlignment="Left" Margin="30,109,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtDesc" HorizontalAlignment="Left" Margin="110,113,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="275" Height="87"/>
-        <Label x:Name="lblProductQty" Content="Quantity:" HorizontalAlignment="Left" Margin="30,225,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblPrice" Content="Price:" HorizontalAlignment="Left" Margin="248,73,0,0" VerticalAlignment="Top" Width="45"/>
-        <TextBox x:Name="txtQty" HorizontalAlignment="Left" Margin="110,225,0,0" PreviewTextInput="txtQty_PreviewTextInput" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="26"/>
-        <TextBox x:Name="txtPrice" HorizontalAlignment="Left" Margin="298,69,0,0" PreviewTextInput="txtPrice_PreviewTextInput" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="87" Height="26"/>
-        <DataGrid x:Name="DataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="400,0,20,0" Height="410" VerticalAlignment="Center"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="lblProductName" Content="Product:" HorizontalAlignment="Left" Margin="35,80,0,0" VerticalAlignment="Top" Height="26" Width="54"/>
+        <ComboBox x:Name="CBCat" HorizontalAlignment="Left" Margin="112,37,0,0" VerticalAlignment="Top" Width="120" DropDownClosed="CBCat_DropDownClosed" Height="22"/>
+        <TextBox x:Name="txtProduct" HorizontalAlignment="Left" Margin="115,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="26"/>
+        <Label x:Name="lblCategory" Content="Category ID:" HorizontalAlignment="Left" Margin="32,37,0,0" VerticalAlignment="Top" Height="26" Width="75"/>
+        <Label x:Name="lblProductDesc" Content="Description:" HorizontalAlignment="Left" Margin="32,131,0,0" VerticalAlignment="Top" Height="26" Width="73"/>
+        <TextBox x:Name="txtDesc" HorizontalAlignment="Left" Margin="112,135,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="275" Height="87"/>
+        <Label x:Name="lblProductQty" Content="Quantity:" HorizontalAlignment="Left" Margin="32,247,0,0" VerticalAlignment="Top" Height="26" Width="58"/>
+        <Label x:Name="lblPrice" Content="Price:" HorizontalAlignment="Left" Margin="253,80,0,0" VerticalAlignment="Top" Width="44" Height="26"/>
+        <TextBox x:Name="txtQty" HorizontalAlignment="Left" Margin="112,247,0,0" PreviewTextInput="txtQty_PreviewTextInput" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="26"/>
+        <TextBox x:Name="txtPrice" HorizontalAlignment="Left" Margin="319,80,0,0" PreviewTextInput="txtPrice_PreviewTextInput" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="87" Height="26"/>
+        <DataGrid x:Name="DataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="430,0,20,0" Height="340" VerticalAlignment="Center"/>
         <Button x:Name="AddProdBtn" Content="ADD" HorizontalAlignment="Left" Margin="46,345,0,0" VerticalAlignment="Top" Height="50" Width="70" Click="AddProdBtn_Click"/>
-        <Button x:Name="UpdateProdBtn" Content="UPDATE" HorizontalAlignment="Left" Margin="135,345,0,0" VerticalAlignment="Top" Height="50" Width="70"/>
-        <Button x:Name="DeleteProdBtn" Content="DELETE" HorizontalAlignment="Left" Margin="298,345,0,0" VerticalAlignment="Top" Height="50" Width="70" Click="DeleteProdBtn_Click"/>
-        <TextBox x:Name="txtCategoryID" HorizontalAlignment="Left" Margin="299,33,0,0" PreviewTextInput="txtPrice_PreviewTextInput" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="86" Height="22" IsEnabled="False"/>
-        <Label x:Name="lblID" Content="ID:" HorizontalAlignment="Left" Margin="248,33,0,0" VerticalAlignment="Top" Width="44"/>
+        <Button x:Name="UpdateProdBtn" Content="UPDATE" HorizontalAlignment="Left" Margin="135,345,0,0" VerticalAlignment="Top" Height="50" Width="70" Click="UpdateProdBtn_Click"/>
+        <Button x:Name="DeleteProdBtn" Content="DELETE" HorizontalAlignment="Left" Margin="316,345,0,0" VerticalAlignment="Top" Height="50" Width="70" Click="DeleteProdBtn_Click"/>
+        <TextBox x:Name="txtCategoryID" HorizontalAlignment="Left" Margin="250,33,0,0" PreviewTextInput="txtPrice_PreviewTextInput" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="138" Height="30" IsEnabled="False" Visibility="Hidden"/>
+        <Label x:Name="lblProductID" Content="Product ID:" HorizontalAlignment="Left" Margin="430,10,0,0" VerticalAlignment="Top" Height="26" Width="69"/>
+        <ComboBox x:Name="CBPID" HorizontalAlignment="Left" Margin="510,10,0,0" VerticalAlignment="Top" Width="120" DropDownClosed="CBPID_DropDownClosed" SelectionChanged="CBPID_SelectionChanged" Height="22"/>
+        <Button x:Name="ClrBtn" Content="CLEAR" HorizontalAlignment="Left" Margin="218,345,0,0" VerticalAlignment="Top" Height="50" Width="70" Click="ClrBtn_Click"/>
 
     </Grid>
 </Page>

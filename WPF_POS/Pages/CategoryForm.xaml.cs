@@ -26,6 +26,7 @@ namespace WPF_POS.Pages
         {
             InitializeComponent();
             loadData();
+            CID_Combo();
         }
         SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
@@ -44,7 +45,7 @@ namespace WPF_POS.Pages
         {
             txtCategory.Clear();
             txtDesc.Clear();
-            txtCategoryid.Clear();
+           
 
         }
 
@@ -119,12 +120,10 @@ namespace WPF_POS.Pages
 
 
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
             con.Open();
-            SqlCommand cmd = new SqlCommand("update tblcategory set category_name = '" + txtCategory.Text + "', category_desc = '" + txtDesc.Text + "' WHERE category_id = '" + txtCategoryid.Text + "' ", con);
+            SqlCommand cmd = new SqlCommand("update tblcategory set category_name = '" + txtCategory.Text + "', category_desc = '" + txtDesc.Text + "' WHERE category_id = '" + CBCatID.Text + "' ", con);
 
             try
             {
@@ -141,9 +140,84 @@ namespace WPF_POS.Pages
                 con.Close();
                 clearData();
                 loadData();
-               
+
 
             }
+
+
+        }
+
+        /* private void Button_Click(object sender, RoutedEventArgs e)
+         {
+
+             con.Open();
+             SqlCommand cmd = new SqlCommand("update tblcategory set category_name = '" + txtCategory.Text + "', category_desc = '" + txtDesc.Text + "' WHERE category_id = '" + txtCategoryid.Text + "' ", con);
+
+             try
+             {
+                 cmd.ExecuteNonQuery();
+                 MessageBox.Show("Category updated successfully", "Updated", MessageBoxButton.OK, MessageBoxImage.Information);
+
+             }
+             catch (SqlException ex)
+             {
+                 MessageBox.Show(ex.Message);
+             }
+             finally
+             {
+                 con.Close();
+                 clearData();
+                 loadData();
+
+
+             }
+         }
+        */
+        private void CBCatID_DropDownClosed(object sender, EventArgs e)
+        {
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("select * FROM tblcategory where category_id ='" + CBCatID.Text + "' ", con);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    string cname = dr.GetString(1);
+                    txtCategory.Text = cname;
+
+                    string catdesc = dr.GetString(2);
+                    txtDesc.Text = catdesc;
+      
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        void CID_Combo()
+        {
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("select * FROM tblcategory", con);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    string pid = dr.GetInt32(0).ToString();
+                    CBCatID.Items.Add(pid);
+
+
+
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }

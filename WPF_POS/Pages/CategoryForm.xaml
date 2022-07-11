@@ -9,16 +9,16 @@
       Title="CategoryForm">
 
     <Grid>
-        <Label x:Name="lblCategory" Content="Category:" HorizontalAlignment="Left" Margin="40,93,0,0" VerticalAlignment="Top" Width="60"/>
+        <Label x:Name="lblCategory" Content="Category:" HorizontalAlignment="Left" Margin="5,54,0,0" VerticalAlignment="Top" Width="60"/>
         <Button x:Name="AddDescBtn" Content="ADD" HorizontalAlignment="Left" Margin="40,340,0,0" VerticalAlignment="Top" Height="50" Width="70" Click="AddDescBtn_Click"/>
         <Button x:Name="updateBtn" Content="UPDATE" HorizontalAlignment="Left" Margin="125,340,0,0" VerticalAlignment="Top" Height="50" Width="70" Click="Button_Click"/>
         <Button x:Name="deleteBtn" Content="DELETE" HorizontalAlignment="Left" Margin="210,340,0,0" VerticalAlignment="Top" Height="50" Width="70" Click="deleteBtn_Click"/>
-        <DataGrid x:Name="DataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="400,10,10,10"/>
-        <TextBox x:Name="txtCategory" HorizontalAlignment="Left" Margin="125,95,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="22"/>
-        <Label Content="Description:" HorizontalAlignment="Left" Margin="40,146,0,0" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="txtDesc" HorizontalAlignment="Left" Margin="125,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="260" Height="158"/>
-        <Label x:Name="lblCategory_ID" Content="Category ID:" HorizontalAlignment="Left" Margin="40,49,0,0" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="txtCategoryid" HorizontalAlignment="Left" Margin="125,53,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="22"/>
+        <DataGrid x:Name="DataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="375,55,35,33"/>
+        <TextBox x:Name="txtCategory" HorizontalAlignment="Left" Margin="90,56,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="22"/>
+        <Label Content="Description:" HorizontalAlignment="Left" Margin="5,107,0,0" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="txtDesc" HorizontalAlignment="Left" Margin="90,107,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="260" Height="158"/>
+        <Label x:Name="lblCategory_ID" Content="Category ID:" HorizontalAlignment="Left" Margin="375,24,0,0" VerticalAlignment="Top" Width="80"/>
+        <ComboBox x:Name="CBCatID" HorizontalAlignment="Left" Margin="460,26,0,0" VerticalAlignment="Top" Width="120" DropDownClosed="CBCatID_DropDownClosed"/>
 
     </Grid>
 </Page>
