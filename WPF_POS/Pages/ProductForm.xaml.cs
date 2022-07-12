@@ -205,7 +205,7 @@ namespace WPF_POS.Pages
                     con.Close();
                     MessageBox.Show("Successfully Entered", "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
                     loadData();
-                    clearData();
+                    //clearData();
                 }
             }
             catch (SqlException ex)
@@ -227,7 +227,7 @@ namespace WPF_POS.Pages
                 con.Close();
                 MessageBox.Show("Deleted successfully");
                 loadData();
-                clearData();
+                //clearData();
                 con.Close();
 
             }
@@ -259,7 +259,7 @@ namespace WPF_POS.Pages
             finally
             {
                 con.Close();
-                clearData();
+                //clearData();
                 loadData();
 
 
@@ -269,7 +269,7 @@ namespace WPF_POS.Pages
 
         private void ClrBtn_Click(object sender, RoutedEventArgs e)
         {
-            clearData();
+            //clearData();
 
         }
     }
