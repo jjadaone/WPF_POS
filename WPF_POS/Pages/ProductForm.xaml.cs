@@ -136,6 +136,15 @@ namespace WPF_POS.Pages
             }
 
         }
+        public void clearData()
+        {
+            txtProduct.Clear();
+            txtDesc.Clear();
+            txtPrice.Clear();
+            txtQty.Clear();
+            CBCat.Items.Clear();
+
+        }
         public void loadData()
         {
             SqlCommand cmd = new SqlCommand("SELECT * FROM tblproduct", con);

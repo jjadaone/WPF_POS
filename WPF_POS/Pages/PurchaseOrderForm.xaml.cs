@@ -81,11 +81,6 @@ namespace WPF_POS.Pages
                 MessageBox.Show("Order Total is required", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            if (OrderDate.Text == String.Empty)
-            {
-                MessageBox.Show("Order Total is required", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
            
             return true;
         }
@@ -107,8 +102,9 @@ namespace WPF_POS.Pages
                     cmd.Parameters.AddWithValue("@purchase_order_quantity", txtOrderQuantity.Text);
                     cmd.Parameters.AddWithValue("@purchase_order_total", txtOrderTotal.Text);
                     cmd.Parameters.AddWithValue("@status", txtOrderStatus.Text);
-                    cmd.Parameters.AddWithValue("@order_date", OrderDate.Text);
-                    cmd.Parameters.AddWithValue("@received_date", ReceivedDate.Text);
+                    cmd.Parameters.AddWithValue("@order_date", txtDateTime.Text = DateTime.Now.ToString());
+                    cmd.Parameters.AddWithValue("@received_date", txtReceivedDate.Text = "");
+
                     con.Open();
                     cmd.ExecuteNonQuery();
                     con.Close();
@@ -283,11 +279,7 @@ namespace WPF_POS.Pages
                     string s = dr.GetString(5);
                     txtOrderStatus.Text = s;
 
-                    string od = dr.GetDateTime(6).ToString();
-                    OrderDate.Text = od;
 
-                    string rd = dr.GetDateTime(7).ToString();
-                    ReceivedDate.Text = rd;
                 }
                 con.Close();
             }
@@ -302,7 +294,7 @@ namespace WPF_POS.Pages
         private void UpdateOrderBtn_Click(object sender, RoutedEventArgs e)
         {
             con.Open();
-            SqlCommand cmd = new SqlCommand("update tblpurchaseorder set product_id = '" + txtProductID.Text + "', supplier_id = '" + txtSuppID.Text + "', purchase_order_total = '" + txtOrderTotal.Text + "', status = '" + txtOrderStatus.Text + "', order_date = '" + OrderDate.Text + "', received_date = '" + ReceivedDate.Text + "' WHERE purchase_order_id = '" + CBPOID.Text + "' ", con);
+            SqlCommand cmd = new SqlCommand("update tblpurchaseorder set product_id = '" + txtProductID.Text + "', supplier_id = '" + txtSuppID.Text + "', purchase_order_total = '" + txtOrderTotal.Text + "', status = '" + txtOrderStatus.Text + "' WHERE purchase_order_id = '" + CBPOID.Text + "' ", con);
 
             try
             {
