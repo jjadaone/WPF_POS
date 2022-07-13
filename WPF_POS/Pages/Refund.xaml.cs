@@ -75,6 +75,30 @@ namespace WPF_POS.Pages
             }
         }
 
+        public void fillProduct()
+        {
+            try
+            {
+                con.Open();
+                if ()
+                {
+                    SqlCommand cmd = new SqlCommand("SELECT product_id, product_price FROM tblproduct WHERE product_price=@product_price", con);
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        int id = dr.GetInt32(0);
+                        //string text = dr.GetString(1);
+                        purchase.Items.Add(id);
+                    }
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void cbPurchase_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -110,12 +134,13 @@ namespace WPF_POS.Pages
                 
                 if (refund.IsChecked == true)
                 {
-                    string sql_insert = "INSERT INTO tblrefund(purchase_order_id, refund_quantity, status) VALUES (@purchase_id, @refund_quantity, @status)";
+                    string sql_insert = "INSERT INTO tblrefund(purchase_order_id, refund_quantity, status, created_at) VALUES (@purchase_id, @refund_quantity, @status, @created_at)";
                     string sql_update = "UPDATE tblproduct SET product_quantity=product_quantity-@refund_quantity WHERE product_id=@product_id";
                     SqlCommand cmd = new SqlCommand(sql_insert, con);
                     cmd.Parameters.AddWithValue("@purchase_id", purchase_id);
                     cmd.Parameters.AddWithValue("@refund_quantity", refund_quantity.Text);
                     cmd.Parameters.AddWithValue("@status", "Returned");
+                    cmd.Parameters.AddWithValue("@created_at", DateTime.Now);
                     cmd.ExecuteNonQuery();
                     cmd.Parameters.Clear();
 
@@ -127,11 +152,12 @@ namespace WPF_POS.Pages
                     MessageBox.Show("Refunded");
                 } else if(exchange.IsChecked == true)
                 {
-                    string sql_insert = "INSERT INTO tblrefund(purchase_order_id, refund_quantity, status) VALUES (@purchase_id, @refund_quantity, @status)";
+                    string sql_insert = "INSERT INTO tblrefund(purchase_order_id, refund_quantity, status, created_at) VALUES (@purchase_id, @refund_quantity, @status, @created_at)";
                     SqlCommand cmd = new SqlCommand(sql_insert, con);
                     cmd.Parameters.AddWithValue("@purchase_id", purchase_id);
                     cmd.Parameters.AddWithValue("@refund_quantity", refund_quantity.Text);
                     cmd.Parameters.AddWithValue("@status", "Exchanged");
+                    cmd.Parameters.AddWithValue("@created_at", DateTime.Now);
                     cmd.ExecuteNonQuery();
                     cmd.Parameters.Clear();
 
