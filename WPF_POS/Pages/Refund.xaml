@@ -20,15 +20,16 @@
         <ComboBox SelectionChanged="cbPurchase_SelectionChanged" x:Name="purchase" HorizontalAlignment="Left" Height="33" Margin="138,81,0,0" VerticalAlignment="Top" Width="184" />
 
         <Label Content="Product Name:" HorizontalAlignment="Left" Height="32" Margin="42,113,0,0" VerticalAlignment="Top" Width="91"/>
-        <TextBox x:Name="product" HorizontalAlignment="Left" Height="32" Margin="138,113,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="184"/>
+        <ComboBox x:Name="product" HorizontalAlignment="Left" Height="32" Margin="138,113,0,0" VerticalAlignment="Top" Width="184"/>
         <Label Content="Supplier Name::" HorizontalAlignment="Left" Height="34" Margin="42,145,0,0" VerticalAlignment="Top" Width="91"/>
         <TextBox x:Name="supplier" IsReadOnly="True" HorizontalAlignment="Left" Height="34" Margin="138,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="184"/>
 
         <Label Content="Quantity:" HorizontalAlignment="Left" Height="32" Margin="42,202,0,0" VerticalAlignment="Top" Width="91"/>
         <TextBox x:Name="refund_quantity" HorizontalAlignment="Left" Height="32" Margin="138,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="184"/>
+        <!--
         <Label Content="Status:" HorizontalAlignment="Left" Height="34" Margin="42,234,0,0" VerticalAlignment="Top" Width="91"/>
         <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="34" Margin="138,234,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="184"/>
-
+        -->
         <Button Content="Submit" HorizontalAlignment="Left" Height="46" Margin="158,286,0,0" VerticalAlignment="Top" Width="144" Click="Button_Click"/>
         <DataGrid x:Name="dgrefund" HorizontalAlignment="Left" Height="205" Margin="375,20,0,0" VerticalAlignment="Top" Width="219" d:ItemsSource="{d:SampleData ItemCount=5}"/>
         <DataGrid x:Name="dgexchange" HorizontalAlignment="Left" Height="205" Margin="375,233,0,0" VerticalAlignment="Top" Width="219" d:ItemsSource="{d:SampleData ItemCount=5}"/>

@@ -42,8 +42,11 @@ namespace WPF_POS
             loadOrders();
         }
 
-        SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-        ObservableCollection<Orders> model = new ObservableCollection<Orders>();
+        SqlConnection con = new SqlConnection(@"Data Source=(localdb)\ProjectModels;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        //ObservableCollection<Orders> model = new ObservableCollection<Orders>();
+        List<Orders> model = new List<Orders>();
+
+
         int order_id;
 
         public void loadProducts()
@@ -59,8 +62,10 @@ namespace WPF_POS
         }
         public void loadOrders()
         {
+            //orders.ItemsSource = model;
+            //CollectionViewSource.GetDefaultView(orders.ItemsSource).Refresh();
+            orders.ItemsSource = null;
             orders.ItemsSource = model;
-            CollectionViewSource.GetDefaultView(orders.ItemsSource).Refresh();
 
         }
 
@@ -216,7 +221,8 @@ namespace WPF_POS
             {
                 sb.Append(item.product_name.PadRight(FIRST_COL_PAD));
 
-                var breakDown = item.product_quantity > 0 ? item.product_quantity + "x" + item.product_price : string.Empty;
+                //var breakDown = item.product_quantity > 0 ? item.product_quantity + "x" + item.product_price : string.Empty;
+                var breakDown = item.quantity > 0 ? item.quantity + "x" + item.product_price : string.Empty;
                 sb.Append(breakDown.PadRight(SECOND_COL_PAD));
 
                 sb.AppendLine(string.Format("{0:0.00} A", item.total).PadLeft(THIRD_COL_PAD));
@@ -241,15 +247,57 @@ namespace WPF_POS
         {
             try
             {
-                DataRowView row = products.SelectedItem as DataRowView;
-                int order_id = Convert.ToInt32(row.Row.ItemArray[0]);
+                DataRowView row = orders.SelectedItem as DataRowView;
+                string s = Convert.ToString(row.Row.ItemArray[1]);
+                //if (row != null)
+                //    // due to observable collection?
+                //    // due to not connected to the clickevent of the datagrid orders
+                //    MessageBox.Show("nul");
 
-                model.RemoveAt(order_id);
+                //var order = model.FirstOrDefault(p => p.product_id == order_id);
+                //if (order != null)
+                //    model.Remove(order);
+
+
+
+
             }
             catch
             {
                 MessageBox.Show("Error");
             }
         }
+
+        private void OrderDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                //var ord = orders.SelectedItems;
+
+                //DataRowView row = orders.SelectedItem as DataRowView;
+                //int pid = Convert.ToInt32(row.Row.ItemArray[0]);
+                //MessageBox.Show(pid.ToString());
+
+                foreach (var data in orders.SelectedItems)
+                {
+                    //Orders myData = data as Orders;
+                    //MessageBox.Show(myData.product_name);
+                    Orders myData = data as Orders;
+                    int p_id = myData.product_id;
+                    //MessageBox.Show(p_id.ToString());
+
+                    var order = model.FirstOrDefault(p => p.product_id == p_id);
+                    if (order != null)
+                        model.Remove(order);
+                    loadOrders();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+
     }
 }

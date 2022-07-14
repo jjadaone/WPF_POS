@@ -8,7 +8,7 @@
         Title="CustomerOrderWindow" Height="500" Width="1000">
     <Grid>
         <DataGrid x:Name="products" HorizontalAlignment="Left" Height="437" Margin="243,18,0,0" VerticalAlignment="Top" Width="353" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="ProductDoubleClick"/>
-        <DataGrid x:Name="orders" HorizontalAlignment="Left" Height="437" Margin="601,18,0,0" VerticalAlignment="Top" Width="373" d:ItemsSource="{d:SampleData ItemCount=5}" />
+        <DataGrid x:Name="orders" HorizontalAlignment="Left" Height="437" Margin="601,18,0,0" VerticalAlignment="Top" Width="373" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="OrderDoubleClick"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="437" Margin="10,0,0,0" VerticalAlignment="Center" Width="228">
             <Button Content="Calculate Total" HorizontalAlignment="Left" Height="33" Margin="22,9,0,0" VerticalAlignment="Top" Width="195" Click="btnCalculateClick"/>
         </Border>

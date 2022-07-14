@@ -29,11 +29,12 @@ namespace WPF_POS.Pages
             loadReceived();
         }
 
-        SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        //SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        SqlConnection con = new SqlConnection(@"Data Source=(localdb)\ProjectModels;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
         public void loadOrders()
         {
-            string sql = "SELECT purchase_order_id, supplier_name, product_name, order_date, purchase_order_quantity, purchase_order_total  FROM tblpurchaseorder INNER JOIN tblsupplier ON tblsupplier.supplier_id=tblpurchaseorder.supplier_id INNER JOIN tblproduct ON tblproduct.product_id=tblpurchaseorder.product_id WHERE tblpurchaseorder.status = 'Ordered'";
+            string sql = "SELECT purchase_order_id, supplier_name, tblproduct.product_id, product_name, order_date, purchase_order_quantity, purchase_order_total  FROM tblpurchaseorder INNER JOIN tblsupplier ON tblsupplier.supplier_id=tblpurchaseorder.supplier_id INNER JOIN tblproduct ON tblproduct.product_id=tblpurchaseorder.product_id WHERE tblpurchaseorder.status = 'Ordered'";
             SqlCommand cmd = new SqlCommand(sql, con);
             DataTable dt = new DataTable();
             con.Open();
@@ -61,6 +62,9 @@ namespace WPF_POS.Pages
             {
                 DataRowView row = orders.SelectedItem as DataRowView;
                 string purchase_id = row.Row.ItemArray[0].ToString();
+                string product_id = row.Row.ItemArray[2].ToString();
+                string quantity = row.Row.ItemArray[5].ToString();
+                MessageBox.Show(product_id, quantity);
 
                 string sql = @"UPDATE tblpurchaseorder SET status=@status, received_date=@received_date WHERE purchase_order_id=@purchase_id";
                 SqlCommand cmd = new SqlCommand(sql, con);
@@ -70,7 +74,13 @@ namespace WPF_POS.Pages
                 cmd.Parameters.AddWithValue("@purchase_id", purchase_id);
                 con.Open();
                 cmd.ExecuteNonQuery();
-                con.Close();
+                cmd.Parameters.Clear();
+
+                cmd.CommandText = @"UPDATE tblproduct SET product_quantity=product_quantity+@received_quantity WHERE product_id=@product_id";
+                cmd.Parameters.AddWithValue("@received_quantity", quantity);
+                cmd.Parameters.AddWithValue("@product_id", product_id);
+                cmd.ExecuteNonQuery();
+
                 MessageBox.Show("Order received.");
                 loadOrders();
                 loadReceived();
@@ -78,6 +88,10 @@ namespace WPF_POS.Pages
             catch
             {
                 MessageBox.Show("Error receiving order.");
+            }
+            finally
+            {
+                con.Close();
             }
         }
 
