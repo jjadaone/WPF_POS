@@ -16,12 +16,13 @@
         <TextBox IsReadOnly="True" x:Name="total" HorizontalAlignment="Left" Height="29" Margin="110,89,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="113"/>
         <Label Content="Cash:" HorizontalAlignment="Left" Height="29" Margin="28,118,0,0" VerticalAlignment="Top" Width="77"/>
         <TextBox x:Name="cash" HorizontalAlignment="Left" Height="29" Margin="110,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="113"/>
-        <TextBox x:Name="balance" HorizontalAlignment="Left" Height="29" Margin="85,242,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="113"/>
+        <Label Content="Balance:" HorizontalAlignment="Left" Height="29" Margin="28,249,0,0" VerticalAlignment="Top" Width="77"/>
+        <TextBox IsReadOnly="True" x:Name="balance" HorizontalAlignment="Left" Height="30" Margin="110,248,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="113"/>
         <Button Content="Change" HorizontalAlignment="Left" Margin="20,175,0,0" VerticalAlignment="Top" Width="64" Height="44" Click="btnChangeClick"/>
         <Button Content="Submit" HorizontalAlignment="Left" Margin="94,175,0,0" VerticalAlignment="Top" Width="64" Height="44" RenderTransformOrigin="2.578,0.671" Click="btnSubmitClick"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="166,175,0,0" VerticalAlignment="Top" Width="64" Height="44" Click="btnCancelClick"/>
         <Button Content="Print Receipt" HorizontalAlignment="Left" Height="32" Margin="74,316,0,0" VerticalAlignment="Top" Width="100" Click="btnPrintClick"/>
-        <Button Content="Void" HorizontalAlignment="Left" Height="38" Margin="56,391,0,0" VerticalAlignment="Top" Width="86" Click="btnRemoveClick"/>
+        <Button Content="Save" HorizontalAlignment="Left" Height="45" Margin="332,226,0,0" VerticalAlignment="Top" Width="64" Click="btnSaveChanges"/>
 
     </Grid>
 </Window>

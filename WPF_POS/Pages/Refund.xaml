@@ -13,19 +13,19 @@
             <ColumnDefinition Width="633*"/>
             <ColumnDefinition Width="167*"/>
         </Grid.ColumnDefinitions>
-        <RadioButton x:Name="refund" Content="Return" HorizontalAlignment="Left" Height="21" Margin="138,39,0,0" VerticalAlignment="Top" Width="92"/>
-        <RadioButton x:Name="exchange" Content="Exchange" HorizontalAlignment="Left" Height="21" Margin="248,38,0,0" VerticalAlignment="Top" Width="92"/>
+        <RadioButton x:Name="refund" Content="Return" HorizontalAlignment="Left" Height="21" Margin="138,39,0,0" VerticalAlignment="Top" Width="92" Checked="returncheck"/>
+        <RadioButton x:Name="exchange" Content="Exchange" HorizontalAlignment="Left" Height="21" Margin="248,38,0,0" VerticalAlignment="Top" Width="92" Checked="exchangecheck"/>
 
         <Label Content="Purchase ID:" HorizontalAlignment="Left" Height="33" Margin="42,81,0,0" VerticalAlignment="Top" Width="91"/>
-        <ComboBox SelectionChanged="cbPurchase_SelectionChanged" x:Name="purchase" HorizontalAlignment="Left" Height="33" Margin="138,81,0,0" VerticalAlignment="Top" Width="184" />
+        <ComboBox IsEnabled="False" SelectionChanged="cbPurchase_SelectionChanged" x:Name="purchase" HorizontalAlignment="Left" Height="33" Margin="138,81,0,0" VerticalAlignment="Top" Width="184" />
 
         <Label Content="Product Name:" HorizontalAlignment="Left" Height="32" Margin="42,113,0,0" VerticalAlignment="Top" Width="91"/>
-        <ComboBox x:Name="product" HorizontalAlignment="Left" Height="32" Margin="138,113,0,0" VerticalAlignment="Top" Width="184"/>
+        <ComboBox IsEnabled="False" x:Name="product" HorizontalAlignment="Left" Height="32" Margin="138,113,0,0" VerticalAlignment="Top" Width="184"/>
         <Label Content="Supplier Name::" HorizontalAlignment="Left" Height="34" Margin="42,145,0,0" VerticalAlignment="Top" Width="91"/>
         <TextBox x:Name="supplier" IsReadOnly="True" HorizontalAlignment="Left" Height="34" Margin="138,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="184"/>
 
         <Label Content="Quantity:" HorizontalAlignment="Left" Height="32" Margin="42,202,0,0" VerticalAlignment="Top" Width="91"/>
-        <TextBox x:Name="refund_quantity" HorizontalAlignment="Left" Height="32" Margin="138,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="184"/>
+        <TextBox IsReadOnly="True" x:Name="refund_quantity" HorizontalAlignment="Left" Height="32" Margin="138,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="184"/>
         <!--
         <Label Content="Status:" HorizontalAlignment="Left" Height="34" Margin="42,234,0,0" VerticalAlignment="Top" Width="91"/>
         <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="34" Margin="138,234,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="184"/>

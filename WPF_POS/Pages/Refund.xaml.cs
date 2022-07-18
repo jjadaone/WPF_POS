@@ -59,7 +59,8 @@ namespace WPF_POS.Pages
             try
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT purchase_order_id, product_name FROM tblpurchaseorder INNER JOIN tblproduct ON tblproduct.product_id=tblpurchaseorder.product_id WHERE status='Received'", con);
+                SqlCommand cmd = new SqlCommand("SELECT purchase_order_id, product_name FROM tblpurchaseorder INNER JOIN tblproduct ON tblproduct.product_id=tblpurchaseorder.product_id WHERE status='Received' AND tblpurchaseorder.purchase_order_quantity>0", con);
+                //SqlCommand cmd = new SqlCommand("SELECT po.purchase_order_id, product_name FROM tblpurchaseorder as po INNER JOIN tblproduct as pd ON pd.product_id=po.product_id INNER JOIN tblrefund as r ON r.purchase_order_id=po.purchase_order_id WHERE po.status='Received'", con);
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
@@ -99,14 +100,15 @@ namespace WPF_POS.Pages
                     throw new InvalidOperationException("No records");
 
                 supplier.Text = reader.GetString(supplier_name);
-
                 if (exchange.IsChecked == true)
                 {
+                    int pd_id = reader.GetInt32(p_id);
                     decimal product_price = reader.GetDecimal(p_price);
                     refund_quantity.Text = reader.GetInt32(po_quantity).ToString();
                     reader.Close();
-                    cmd.CommandText = "select product_id from tblproduct where product_price=@p_price";
+                    cmd.CommandText = "select product_id from tblproduct where product_price=@p_price and product_id!=@p_id";
                     cmd.Parameters.AddWithValue("@p_price", product_price);
+                    cmd.Parameters.AddWithValue("@p_id", pd_id);
                     SqlDataReader sdr = cmd.ExecuteReader();
                     product.Items.Clear();
                     while (sdr.Read())
@@ -125,7 +127,7 @@ namespace WPF_POS.Pages
             }
             catch
             {
-                MessageBox.Show("Error1");
+                //MessageBox.Show("Error1");
             }
             finally
             {
@@ -144,7 +146,6 @@ namespace WPF_POS.Pages
                 if (refund.IsChecked == true)
                 {
                     string sql_insert = "INSERT INTO tblrefund(purchase_order_id, refund_quantity, status, created_at) VALUES (@purchase_id, @refund_quantity, @status, @created_at)";
-                    string sql_update = "UPDATE tblproduct SET product_quantity=product_quantity-@refund_quantity WHERE product_id=@product_id";
                     SqlCommand cmd = new SqlCommand(sql_insert, con);
                     cmd.Parameters.AddWithValue("@purchase_id", purchase_id);
                     cmd.Parameters.AddWithValue("@refund_quantity", refund_quantity.Text);
@@ -153,6 +154,14 @@ namespace WPF_POS.Pages
                     cmd.ExecuteNonQuery();
                     cmd.Parameters.Clear();
 
+                    string po_update = "UPDATE tblpurchaseorder SET purchase_order_quantity=purchase_order_quantity-@refund_quantity WHERE purchase_order_id=@purchase_id";
+                    cmd.CommandText = po_update;
+                    cmd.Parameters.AddWithValue("@refund_quantity", refund_quantity.Text);
+                    cmd.Parameters.AddWithValue("@purchase_id", purchase_id);
+                    cmd.ExecuteNonQuery();
+                    cmd.Parameters.Clear();
+
+                    string sql_update = "UPDATE tblproduct SET product_quantity=product_quantity-@refund_quantity WHERE product_id=@product_id";
                     cmd.CommandText = sql_update;
                     cmd.Parameters.AddWithValue("@refund_quantity", refund_quantity.Text);
                     //cmd.Parameters.AddWithValue("@product_id", product.Text);
@@ -191,6 +200,11 @@ namespace WPF_POS.Pages
                     MessageBox.Show("Exchanged");
                 }
 
+                purchase.SelectedIndex = -1;
+                product.SelectedIndex = -1;
+                supplier.Text = null;
+                refund_quantity.Text = null; 
+
             }
             catch
             {
@@ -202,5 +216,27 @@ namespace WPF_POS.Pages
             }
         }
 
+        private void returncheck(object sender, RoutedEventArgs e)
+        {
+
+            supplier.Text = null;
+            purchase.SelectedIndex = -1;
+            product.SelectedIndex = -1;
+            purchase.IsReadOnly = false;
+            refund_quantity.IsReadOnly = false;
+            product.IsEnabled = true;
+            purchase.IsEnabled = true;
+        }
+
+        private void exchangecheck(object sender, RoutedEventArgs e)
+        {
+            supplier.Text = null;
+            purchase.SelectedIndex = -1;
+            product.SelectedIndex = -1;
+            purchase.IsReadOnly = false;
+            refund_quantity.IsReadOnly = true;
+            product.IsEnabled = true;
+            purchase.IsEnabled = true;
+        }
     }
 }

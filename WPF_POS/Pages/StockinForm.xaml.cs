@@ -80,18 +80,16 @@ namespace WPF_POS.Pages
                 cmd.Parameters.AddWithValue("@received_quantity", quantity);
                 cmd.Parameters.AddWithValue("@product_id", product_id);
                 cmd.ExecuteNonQuery();
-
+                con.Close();
                 MessageBox.Show("Order received.");
+                // needs refreshing the datagrids
                 loadOrders();
                 loadReceived();
+
             }
             catch
             {
                 MessageBox.Show("Error receiving order.");
-            }
-            finally
-            {
-                con.Close();
             }
         }
 

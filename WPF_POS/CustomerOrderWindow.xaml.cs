@@ -40,6 +40,7 @@ namespace WPF_POS
             InitializeComponent();
             loadProducts();
             loadOrders();
+
         }
 
         SqlConnection con = new SqlConnection(@"Data Source=(localdb)\ProjectModels;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
@@ -139,7 +140,13 @@ namespace WPF_POS
             {
                 decimal totalv = Convert.ToDecimal(total.Text);
                 decimal cashv = Convert.ToDecimal(cash.Text);
-                balance.Text = (cashv - totalv).ToString();
+                if (totalv <= cashv)
+                    balance.Text = (cashv - totalv).ToString();
+                else if (totalv > cashv)
+                    MessageBox.Show("Invalid payment amount.");
+                    
+                    
+
             }
              catch
             {
@@ -190,6 +197,11 @@ namespace WPF_POS
                     }
                     MessageBox.Show("Order successful");
                     model.Clear();
+
+                    total.Text = null;
+                    cash.Text = null;
+                    balance.Text = null;
+                    orders.ItemsSource = null;
                 }
             }
             catch
@@ -209,64 +221,98 @@ namespace WPF_POS
 
         private void btnPrintClick(object sender, RoutedEventArgs e)
         {
-            const int FIRST_COL_PAD = 20;
-            const int SECOND_COL_PAD = 7;
-            const int THIRD_COL_PAD = 20;
-
-            var sb = new StringBuilder();
-            sb.AppendLine("Start of receipt");
-            sb.AppendLine("================");
-
-            foreach (var item in model)
-            {
-                sb.Append(item.product_name.PadRight(FIRST_COL_PAD));
-
-                //var breakDown = item.product_quantity > 0 ? item.product_quantity + "x" + item.product_price : string.Empty;
-                var breakDown = item.quantity > 0 ? item.quantity + "x" + item.product_price : string.Empty;
-                sb.Append(breakDown.PadRight(SECOND_COL_PAD));
-
-                sb.AppendLine(string.Format("{0:0.00} A", item.total).PadLeft(THIRD_COL_PAD));
-
-                //if (item.Discount > 0)
-                //{
-                //    sb.Append(string.Format("DISCOUNT {0:D2}%", item.Discount).PadRight(FIRST_COL_PAD + SECOND_COL_PAD));
-                //    sb.Append(string.Format("{0:0.00} A", -(item.Total / 100 * item.Discount)).PadLeft(THIRD_COL_PAD));
-                //    sb.AppendLine();
-                //}
-            }
-
-            sb.AppendLine("================");
-            sb.AppendLine("Total: " + total.Text);
-            sb.AppendLine("THANK YOU!");
-
-            MessageBox.Show(sb.ToString());
-
-        }
-
-        private void btnRemoveClick(object sender, RoutedEventArgs e)
-        {
             try
             {
-                DataRowView row = orders.SelectedItem as DataRowView;
-                string s = Convert.ToString(row.Row.ItemArray[1]);
-                //if (row != null)
-                //    // due to observable collection?
-                //    // due to not connected to the clickevent of the datagrid orders
-                //    MessageBox.Show("nul");
+                const int FIRST_COL_PAD = 20;
+                const int SECOND_COL_PAD = 7;
+                const int THIRD_COL_PAD = 20;
 
-                //var order = model.FirstOrDefault(p => p.product_id == order_id);
-                //if (order != null)
-                //    model.Remove(order);
+                var sb = new StringBuilder();
+                //sb.AppendLine("Start of receipt");
+                //sb.AppendLine("================");
+                sb.AppendLine("=============================");
 
+                foreach (var item in model)
+                {
+                    sb.Append(item.product_name.PadRight(FIRST_COL_PAD));
 
+                    //var breakDown = item.product_quantity > 0 ? item.product_quantity + "x" + item.product_price : string.Empty;
+                    var breakDown = item.quantity > 0 ? item.quantity + "x" + item.product_price : string.Empty;
+                    sb.Append(breakDown.PadRight(SECOND_COL_PAD));
 
+                    sb.AppendLine(string.Format("{0:0.00} A", item.total).PadLeft(THIRD_COL_PAD));
 
+                    //if (item.Discount > 0)
+                    //{
+                    //    sb.Append(string.Format("DISCOUNT {0:D2}%", item.Discount).PadRight(FIRST_COL_PAD + SECOND_COL_PAD));
+                    //    sb.Append(string.Format("{0:0.00} A", -(item.Total / 100 * item.Discount)).PadLeft(THIRD_COL_PAD));
+                    //    sb.AppendLine();
+                    //}
+                }
+
+                //sb.AppendLine("================");
+                sb.AppendLine("=============================");
+                sb.Append(System.Environment.NewLine);
+                sb.AppendLine("TOTAL: " + total.Text);
+                //sb.AppendLine(String.Format("TOTAL: {0.00.00}" + Convert.ToDecimal(total)));
+
+                sb.Append(System.Environment.NewLine);
+                sb.AppendLine("CASH: " + cash.Text);
+                //sb.AppendLine(String.Format("CASH: {0.00.00}" + Convert.ToDecimal(cash)));
+
+                sb.Append(System.Environment.NewLine);
+                sb.AppendLine("CHANGE: " + balance.Text);
+                //sb.AppendLine(String.Format("CHANGE: {0.00.00}" + Convert.ToDecimal(balance)));
+
+                sb.Append(System.Environment.NewLine);
+                sb.AppendLine("THANK YOU!");
+
+                MessageBox.Show(sb.ToString());
+
+                ReceiptWindow rw = new ReceiptWindow(sb.ToString());
+                //rw.DataContext = this;
+                rw.ShowDialog();
+
+                //PrintDialog printDlg = new PrintDialog();
+
+                ////FlowDocument doc = new FlowDocument();
+
+                //FlowDocument doc = new FlowDocument(new Paragraph(new Run("Starts...")));
+                //doc.Name = "FlowDoc";
+
+                //IDocumentPaginatorSource idpSource = doc;
+                //printDlg.PrintDocument(idpSource.DocumentPaginator, "Hello WPF Printing.");
             }
-            catch
+            catch(Exception ex)
             {
-                MessageBox.Show("Error");
+                MessageBox.Show("Error document, " + ex.Message);
             }
         }
+
+        //private void btnRemoveClick(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        DataRowView row = orders.SelectedItem as DataRowView;
+        //        string s = Convert.ToString(row.Row.ItemArray[1]);
+        //        //if (row != null)
+        //        //    // due to observable collection?
+        //        //    // due to not connected to the clickevent of the datagrid orders
+        //        //    MessageBox.Show("nul");
+
+        //        //var order = model.FirstOrDefault(p => p.product_id == order_id);
+        //        //if (order != null)
+        //        //    model.Remove(order);
+
+
+
+
+        //    }
+        //    catch
+        //    {
+        //        MessageBox.Show("Error");
+        //    }
+        //}
 
         private void OrderDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -298,6 +344,54 @@ namespace WPF_POS
             }
         }
 
+        private void btnSaveChanges(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //foreach (DataGridViewRow i in orders.Rows)
+                //{
+                //    if (i.Cells[1].Value != null)
+                //    {
+                //        name.Add(i.Cells[1].Value.ToString());
+                //    }
 
+                //model.Clear();
+                List<Orders> updatedList = new List<Orders>();
+                foreach (Orders order in orders.ItemsSource)
+                {
+                    if (order != null)
+                    {
+                        //MessageBox.Show(order.product_id.ToString() + " " + order.product_name.ToString() + " " + order.product_price.ToString() + " " + order.quantity.ToString() + " "+ order.total.ToString());
+
+                        updatedList.Add(new Orders
+                        {
+                            product_id = Convert.ToInt32(order.product_id),
+                            product_name = order.product_name.ToString(),
+                            product_price = Convert.ToDecimal(order.product_price),
+                            quantity = Convert.ToInt32(order.quantity),
+                            //total = Convert.ToDecimal(order.total),
+                            total = Convert.ToDecimal(order.product_price * order.quantity),
+                            product_quantity = Convert.ToInt32(order.product_quantity)
+                        });
+                        //MessageBox.Show("added");
+                    } 
+                    //else
+                    //{
+                    //    MessageBox.Show("null");
+                    //}
+                }
+                model.Clear();
+                //model = updatedList;
+                model = null;
+                model = updatedList;
+                MessageBox.Show("Changes saved.");
+                total.Text = null;
+                loadOrders();
+            }
+            catch 
+            {
+                MessageBox.Show("Error1");
+            }
+        }
     }
 }
