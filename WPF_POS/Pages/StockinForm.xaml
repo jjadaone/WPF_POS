@@ -10,11 +10,11 @@
 
     <Grid>
         <Label Content="ORDERS" HorizontalAlignment="Left" Height="36" Margin="26,7,0,0" VerticalAlignment="Top" Width="246" FontWeight="Bold" FontSize="25"/>
-        <DataGrid x:Name="orders" HorizontalAlignment="Center" Height="172" Margin="0,48,0,0" VerticalAlignment="Top" Width="748" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <DataGrid x:Name="orders" HorizontalAlignment="Center" Height="172" Margin="0,48,0,0" VerticalAlignment="Top" Width="710" d:ItemsSource="{d:SampleData ItemCount=5}"/>
         <Label Content="RECEIVED" HorizontalAlignment="Left" Height="36" Margin="26,234,0,0" VerticalAlignment="Top" Width="246" FontWeight="Bold" FontSize="25"/>
-        <DataGrid x:Name="received" HorizontalAlignment="Center" Height="172" Margin="0,275,0,0" VerticalAlignment="Top" Width="748" d:ItemsSource="{d:SampleData ItemCount=5}"/>
-        <Button Content="Save" HorizontalAlignment="Left" Height="36" Margin="480,234,0,0" VerticalAlignment="Top" Width="144" Click="btnSaveClick"/>
-        <Button Content="Clear" HorizontalAlignment="Left" Height="36" Margin="630,234,0,0" VerticalAlignment="Top" Width="144" Click="btnClearClick"/>
+        <DataGrid x:Name="received" HorizontalAlignment="Center" Height="172" Margin="0,275,0,0" VerticalAlignment="Top" Width="710" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <Button  Background="#607D8B" Content="SAVE" HorizontalAlignment="Left" Height="36" Margin="380,234,0,0" VerticalAlignment="Top" Width="144" Click="btnSaveClick"/>
+        <Button  Background="#607D8B" Content="CLEAR" HorizontalAlignment="Left" Height="36" Margin="529,234,0,0" VerticalAlignment="Top" Width="144" Click="btnClearClick"/>
 
     </Grid>
 </Page>

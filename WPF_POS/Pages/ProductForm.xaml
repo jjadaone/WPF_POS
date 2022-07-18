@@ -25,13 +25,13 @@
         <TextBox x:Name="txtQty" HorizontalAlignment="Left" Margin="112,247,0,0" PreviewTextInput="txtQty_PreviewTextInput" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="26"/>
         <TextBox x:Name="txtPrice" HorizontalAlignment="Left" Margin="319,80,0,0" PreviewTextInput="txtPrice_PreviewTextInput" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="87" Height="26"/>
         <DataGrid x:Name="DataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="430,0,20,0" Height="340" VerticalAlignment="Center"/>
-        <Button x:Name="AddProdBtn" Content="ADD" HorizontalAlignment="Left" Margin="46,345,0,0" VerticalAlignment="Top" Height="50" Width="70" Click="AddProdBtn_Click"/>
-        <Button x:Name="UpdateProdBtn" Content="UPDATE" HorizontalAlignment="Left" Margin="135,345,0,0" VerticalAlignment="Top" Height="50" Width="70" Click="UpdateProdBtn_Click"/>
-        <Button x:Name="DeleteProdBtn" Content="DELETE" HorizontalAlignment="Left" Margin="316,345,0,0" VerticalAlignment="Top" Height="50" Width="70" Click="DeleteProdBtn_Click"/>
-        <TextBox x:Name="txtCategoryID" HorizontalAlignment="Left" Margin="250,33,0,0" PreviewTextInput="txtPrice_PreviewTextInput" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="138" Height="30" IsEnabled="False" Visibility="Hidden"/>
+        <Button  Background="#607D8B" x:Name="AddProdBtn" Content="ADD" HorizontalAlignment="Left" Margin="46,345,0,0" VerticalAlignment="Top" Height="50" Width="70" Click="AddProdBtn_Click"/>
+        <Button  Background="#607D8B" x:Name="UpdateProdBtn" Content="UPDATE" HorizontalAlignment="Left" Margin="121,345,0,0" VerticalAlignment="Top" Height="50" Width="84" Click="UpdateProdBtn_Click"/>
+        <Button  Background="#607D8B" x:Name="DeleteProdBtn" Content="DELETE" HorizontalAlignment="Left" Margin="293,345,0,0" VerticalAlignment="Top" Height="50" Width="84" Click="DeleteProdBtn_Click" RenderTransformOrigin="0.762,0.5"/>
+        <TextBox  x:Name="txtCategoryID" HorizontalAlignment="Left" Margin="250,33,0,0" PreviewTextInput="txtPrice_PreviewTextInput" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="138" Height="30" IsEnabled="False" Visibility="Hidden"/>
         <Label x:Name="lblProductID" Content="Product ID:" HorizontalAlignment="Left" Margin="430,10,0,0" VerticalAlignment="Top" Height="26" Width="69"/>
         <ComboBox x:Name="CBPID" HorizontalAlignment="Left" Margin="510,10,0,0" VerticalAlignment="Top" Width="120" DropDownClosed="CBPID_DropDownClosed" SelectionChanged="CBPID_SelectionChanged" Height="22"/>
-        <Button x:Name="ClrBtn" Content="CLEAR" HorizontalAlignment="Left" Margin="218,345,0,0" VerticalAlignment="Top" Height="50" Width="70" Click="ClrBtn_Click"/>
+        <Button  Background="#607D8B" x:Name="ClrBtn" Content="CLEAR" HorizontalAlignment="Left" Margin="210,345,0,0" VerticalAlignment="Top" Height="50" Width="78" Click="ClrBtn_Click"/>
 
     </Grid>
 </Page>

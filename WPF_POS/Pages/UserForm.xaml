@@ -9,23 +9,23 @@
       Title="UserForm">
 
     <Grid>
-        <Label Content="User ID:&#x9;" HorizontalAlignment="Left" Margin="65,21,0,0" VerticalAlignment="Top" Width="152" Height="26"/>
-        <TextBox x:Name="user_id" HorizontalAlignment="Left" Height="26" Margin="222,21,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="159"/>
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="65,53,0,0" VerticalAlignment="Top" Width="152" Height="26"/>
-        <TextBox x:Name="fullname" HorizontalAlignment="Left" Height="26" Margin="222,53,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="159"/>
-        <Label Content="Username:" HorizontalAlignment="Left" Margin="65,84,0,0" VerticalAlignment="Top" Width="152" Height="26"/>
-        <TextBox x:Name="username" HorizontalAlignment="Left" Height="26" Margin="222,84,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="159"/>
-        <Label Content="Password:" HorizontalAlignment="Left" Margin="65,115,0,0" VerticalAlignment="Top" Width="152" Height="26"/>
-        <TextBox x:Name="password" HorizontalAlignment="Left" Height="26" Margin="222,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="159"/>
-        <Label Content="Role:" HorizontalAlignment="Left" Margin="65,146,0,0" VerticalAlignment="Top" Width="152" Height="26"/>
-        <ComboBox x:Name="role" HorizontalAlignment="Left" Margin="222,148,0,0" VerticalAlignment="Top" Width="159">
+        <Label Content="User ID:&#x9;" HorizontalAlignment="Left" Margin="363,23,0,0" VerticalAlignment="Top" Width="52" Height="26"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="28,23,0,0" VerticalAlignment="Top" Width="152" Height="26"/>
+        <TextBox x:Name="fullname" HorizontalAlignment="Left" Height="26" Margin="185,23,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="159"/>
+        <Label Content="Username:" HorizontalAlignment="Left" Margin="28,54,0,0" VerticalAlignment="Top" Width="152" Height="26"/>
+        <TextBox x:Name="username" HorizontalAlignment="Left" Height="26" Margin="185,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="159"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="28,85,0,0" VerticalAlignment="Top" Width="152" Height="26"/>
+        <TextBox x:Name="password" HorizontalAlignment="Left" Height="26" Margin="185,85,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="159"/>
+        <Label Content="Role:" HorizontalAlignment="Left" Margin="28,116,0,0" VerticalAlignment="Top" Width="152" Height="26"/>
+        <ComboBox x:Name="role" HorizontalAlignment="Left" Margin="185,118,0,0" VerticalAlignment="Top" Width="159">
             <ComboBoxItem Content="Cashier"/>
             <ComboBoxItem Content="Administrator"/>
         </ComboBox>
         <DataGrid x:Name="dataGridBasket" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="30,272,30,10"/>
-        <Button Click="insertBtn" Content="Insert" HorizontalAlignment="Left" Margin="159,0,0,0" VerticalAlignment="Center" Width="85" Height="38"/>
-        <Button Click="updateBtn" Content="Update" HorizontalAlignment="Left" Margin="259,0,0,0" VerticalAlignment="Center" Width="85" Height="38"/>
-        <Button Click="deleteBtn"  Content="Delete" HorizontalAlignment="Center" VerticalAlignment="Center" Width="84" Height="38"/>
+        <Button  Background="#607D8B" Click="insertBtn" Content="INSERT" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Center" Width="85" Height="38"/>
+        <Button  Background="#607D8B" Click="updateBtn" Content="UPDATE" HorizontalAlignment="Left" Margin="135,0,0,0" VerticalAlignment="Center" Width="85" Height="38"/>
+        <Button  Background="#607D8B" Click="deleteBtn"  Content="DELETE" HorizontalAlignment="Left" VerticalAlignment="Center" Width="84" Height="38" Margin="363,0,0,0"/>
+        <ComboBox x:Name="CBUID" HorizontalAlignment="Left" Margin="420,23,0,0" VerticalAlignment="Top" Width="110" Height="26" DropDownClosed="CBUID_DropDownClosed"/>
 
     </Grid>
 </Page>

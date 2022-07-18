@@ -29,10 +29,10 @@ namespace WPF_POS.Pages
             loadData();
             CBPName_combo();
             CBSName_combo();
-            CBPOID_combo();
         }
         
-        SqlConnection con = new SqlConnection(@"Data Source=(localdb)\ProjectModels;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        //SqlConnection con = new SqlConnection(@"Data Source=(localdb)\ProjectModels;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
         public void loadData()
         {
@@ -46,8 +46,7 @@ namespace WPF_POS.Pages
         }
         public void clearData()
         {
-            CBPName.Items.Clear();
-            CBSname.Items.Clear();
+
             txtOrderQuantity.Clear();
             txtOrderStatus.Clear();
             txtOrderTotal.Clear();
@@ -112,6 +111,7 @@ namespace WPF_POS.Pages
                     MessageBox.Show("Successfully Entered", "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
                     loadData();
                     clearData();
+
                 }
             }
             catch (SqlException ex)
@@ -172,6 +172,8 @@ namespace WPF_POS.Pages
 
                     string pid = dr.GetInt32(0).ToString();
                     txtProductID.Text = pid;
+                    string price = dr.GetDouble(5).ToString();
+                    txtPrice.Text = price;
                 }
                 con.Close();
             }
@@ -229,26 +231,7 @@ namespace WPF_POS.Pages
                 con.Close();
             }
         }
-        void CBPOID_combo()
-        {
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select * FROM tblpurchaseorder", con);
-                SqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    string poid = dr.GetInt32(0).ToString();
-                    CBPOID.Items.Add(poid);
-                }
-                con.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-        }
+ 
 
         private void CBPOID_DropDownClosed(object sender, EventArgs e)
         {
@@ -257,64 +240,30 @@ namespace WPF_POS.Pages
 
         private void CBPOID_DropDownClosed_1(object sender, EventArgs e)
         {
-            try
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("select * FROM tblpurchaseorder where purchase_order_id ='" + CBPOID.Text + "' ", con);
-                SqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-
-                    string pid = dr.GetInt32(1).ToString();
-                    txtProductID.Text = pid;
-
-                    string sid = dr.GetInt32(2).ToString();
-                    txtSuppID.Text = sid;
-
-                    string oq = dr.GetInt32(3).ToString();
-                    txtOrderQuantity.Text = oq;
-
-                    string ot = dr.GetInt32(4).ToString();
-                    txtOrderTotal.Text = ot;
-
-                    string s = dr.GetString(5);
-                    txtOrderStatus.Text = s;
-
-
-                }
-                con.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
+           
 
         }
 
         private void UpdateOrderBtn_Click(object sender, RoutedEventArgs e)
         {
-            con.Open();
-            SqlCommand cmd = new SqlCommand("update tblpurchaseorder set product_id = '" + txtProductID.Text + "', supplier_id = '" + txtSuppID.Text + "', purchase_order_total = '" + txtOrderTotal.Text + "', status = '" + txtOrderStatus.Text + "' WHERE purchase_order_id = '" + CBPOID.Text + "' ", con);
+        
+        }
 
-            try
+        private void PriceTotalBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            double answer, n1, n2;
+
+           double.TryParse(txtOrderQuantity.Text, out n1);
+           double.TryParse(txtPrice.Text, out n2);
+            answer = n1 * n2;
+            if (answer > 0)
             {
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Category updated successfully", "Updated", MessageBoxButton.OK, MessageBoxImage.Information);
-
+                txtOrderTotal.Text = answer.ToString("c").Remove(0,1);
             }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                con.Close();
-                clearData();
-                loadData();
 
 
-            }
+
         }
     }
 }

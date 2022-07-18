@@ -25,7 +25,8 @@ namespace WPF_POS.Pages
         public UserForm()
         {
             InitializeComponent();
-            loadData(); 
+            loadData();
+            fill_combo();
         }
 
         SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
@@ -44,7 +45,7 @@ namespace WPF_POS.Pages
 
         public void clearData()
         {
-            user_id.Clear();
+            CBUID.Items.Clear();
             fullname.Clear();
             username.Clear();
             password.Clear();
@@ -79,28 +80,26 @@ namespace WPF_POS.Pages
 
         private void updateBtn(object sender, RoutedEventArgs e)
         {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("update tbluser set fullname = '" + fullname.Text + "', username = '" + username.Text + "', password = '" + password.Text + "', role = '" + role.Text + "' WHERE user_id = '" + CBUID.Text + "' ", con);
+
             try
             {
-                string sql = "UPDATE tbluser SET user_id=@user_id, fullname=@fullname, username=@username, password=@password, role=@role WHERE user_id=@user_id";
-                //string sql = "UPDATE employee SET emp_name='" + emp_name.Text + "', emp_age='" + emp_age.Text + "', emp_salary='"+emp_salary.Text+"', join_date='"+join_date.Text+"', phone='"+phone.Text+"' WHERE id='"+emp_id.Text+"' ";
-                SqlCommand cmd = new SqlCommand(sql, con);
-
-                cmd.Parameters.AddWithValue("@user_id", user_id.Text);
-                cmd.Parameters.AddWithValue("@fullname", fullname.Text);
-                cmd.Parameters.AddWithValue("@username", username.Text);
-                cmd.Parameters.AddWithValue("@password", password.Text);
-                cmd.Parameters.AddWithValue("@role", role.SelectionBoxItem.ToString());
-
-                con.Open();
                 cmd.ExecuteNonQuery();
-                con.Close();
-                MessageBox.Show("Data updated successfully!");
-                loadData();
-                clearData();
+                MessageBox.Show("User updated successfully", "Updated", MessageBoxButton.OK, MessageBoxImage.Information);
+
             }
-            catch
+            catch (SqlException ex)
             {
-                MessageBox.Show("Error updating the data.");
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                con.Close();
+                clearData();
+                loadData();
+
+
             }
         }
 
@@ -120,6 +119,54 @@ namespace WPF_POS.Pages
             MessageBox.Show("Deleted successfully");
             loadData();
             clearData();
+
+        }
+        void fill_combo()
+        {
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("select * FROM tbluser", con);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    string uid = dr.GetInt32(0).ToString();
+                    CBUID.Items.Add(uid);
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void CBUID_DropDownClosed(object sender, EventArgs e)
+        {
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("select * FROM tbluser where user_id ='" + CBUID.Text + "' ", con);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+
+                    string uname = dr.GetString(4);
+                    fullname.Text = uname;
+                    string usname = dr.GetString(1);
+                    username.Text = usname;
+                    string pass = dr.GetString(2);
+                    password.Text = pass;
+                    string r = dr.GetString(3);
+                    role.Text = r;
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
 

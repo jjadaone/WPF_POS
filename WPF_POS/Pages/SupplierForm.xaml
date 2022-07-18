@@ -16,9 +16,9 @@
         <TextBox x:Name="txtScontact" HorizontalAlignment="Left" Margin="145,67,0,0" PreviewTextInput="txtScontact_PreviewTextInput"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="22"/>
         <TextBox x:Name="txtSaddress" HorizontalAlignment="Left" Margin="145,108,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="22"/>
         <DataGrid x:Name="DataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="380,67,10,45"/>
-        <Button x:Name="AddSuppBtn" Content="ADD" HorizontalAlignment="Left" Margin="20,345,0,0" VerticalAlignment="Top" Height="40" Width="65" Click="AddSuppBtn_Click"/>
-        <Button x:Name="UpdateSuppBtn" Content="UPDATE" HorizontalAlignment="Left" Margin="105,345,0,0" VerticalAlignment="Top" Height="40" Width="65" Click="UpdateSuppBtn_Click"/>
-        <Button x:Name="DeleteSuppBtn" Content="DELETE" HorizontalAlignment="Left" Margin="285,345,0,0" VerticalAlignment="Top" Height="40" Width="65" Click="DeleteSuppBtn_Click"/>
+        <Button  Background="#607D8B" x:Name="AddSuppBtn" Content="ADD" HorizontalAlignment="Left" Margin="20,345,0,0" VerticalAlignment="Top" Height="40" Width="65" Click="AddSuppBtn_Click"/>
+        <Button  Background="#607D8B" x:Name="UpdateSuppBtn" Content="UPDATE" HorizontalAlignment="Left" Margin="90,345,0,0" VerticalAlignment="Top" Height="40" Width="85" Click="UpdateSuppBtn_Click"/>
+        <Button  Background="#607D8B" x:Name="DeleteSuppBtn" Content="DELETE" HorizontalAlignment="Left" Margin="285,345,0,0" VerticalAlignment="Top" Height="40" Width="80" Click="DeleteSuppBtn_Click"/>
         <ComboBox x:Name="CBSID" HorizontalAlignment="Left" Margin="475,26,0,0" VerticalAlignment="Top" Width="120" Text="CBSID" DropDownClosed="CBSID_DropDownClosed"/>
         <Label Content="Supplier ID:" HorizontalAlignment="Left" Margin="380,24,0,0" VerticalAlignment="Top"/>
 

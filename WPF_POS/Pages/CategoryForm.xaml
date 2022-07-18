@@ -10,9 +10,9 @@
 
     <Grid>
         <Label x:Name="lblCategory" Content="Category:" HorizontalAlignment="Left" Margin="5,54,0,0" VerticalAlignment="Top" Width="60"/>
-        <Button x:Name="AddDescBtn" Content="ADD" HorizontalAlignment="Left" Margin="40,340,0,0" VerticalAlignment="Top" Height="50" Width="70" Click="AddDescBtn_Click"/>
-        <Button x:Name="updateBtn" Content="UPDATE" HorizontalAlignment="Left" Margin="125,340,0,0" VerticalAlignment="Top" Height="50" Width="70" Click="Button_Click"/>
-        <Button x:Name="deleteBtn" Content="DELETE" HorizontalAlignment="Left" Margin="210,340,0,0" VerticalAlignment="Top" Height="50" Width="70" Click="deleteBtn_Click"/>
+        <Button  Background="#607D8B" x:Name="AddDescBtn" Content="ADD" HorizontalAlignment="Left" Margin="40,340,0,0" VerticalAlignment="Top" Height="50" Width="70" Click="AddDescBtn_Click"/>
+        <Button  Background="#607D8B" x:Name="updateBtn" Content="UPDATE" HorizontalAlignment="Left" Margin="115,340,0,0" VerticalAlignment="Top" Height="50" Width="85" Click="Button_Click"/>
+        <Button  Background="#607D8B" x:Name="deleteBtn" Content="DELETE" HorizontalAlignment="Left" Margin="205,340,0,0" VerticalAlignment="Top" Height="50" Width="85" Click="deleteBtn_Click"/>
         <DataGrid x:Name="DataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="375,55,35,33"/>
         <TextBox x:Name="txtCategory" HorizontalAlignment="Left" Margin="90,56,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="22"/>
         <Label Content="Description:" HorizontalAlignment="Left" Margin="5,107,0,0" VerticalAlignment="Top" Width="80"/>
