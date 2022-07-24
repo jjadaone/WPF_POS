@@ -43,8 +43,8 @@ namespace WPF_POS
 
         }
 
-        //SqlConnection con = new SqlConnection(@"Data Source=(localdb)\ProjectModels;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
-        SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        SqlConnection con = new SqlConnection(@"Data Source=(localdb)\ProjectModels;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        //SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         //ObservableCollection<Orders> model = new ObservableCollection<Orders>();
         List<Orders> model = new List<Orders>();
 
@@ -160,7 +160,7 @@ namespace WPF_POS
             try
             {
                 string sql = "INSERT INTO tblsalesorder(sales_order_date, total, cash, balance) VALUES (@sales_order_date, @total, @cash, @balance) SELECT SCOPE_IDENTITY()";
-                string sql_add = "INSERT INTO tblsalesorderdetail(product_id, sales_order_id, sales_order_detail_quantity, sales_order_detail_price, sales_order_detail_total) VALUES (@product_id, @order_id, @detail_quantity, @detail_price, @detail_total)";
+                string sql_add = "INSERT INTO tblsalesorderdetail(product_id, sales_order_id, sales_order_detail_quantity, sales_order_detail_price, sales_order_detail_total, date) VALUES (@product_id, @order_id, @detail_quantity, @detail_price, @detail_total, @date)";
                 string sql_dec = "UPDATE tblproduct SET product_quantity = product_quantity - @detail_quantity WHERE product_id = @product_id ";
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.CommandType = CommandType.Text;
@@ -184,6 +184,7 @@ namespace WPF_POS
                         cmd.Parameters.AddWithValue("@detail_quantity", order.quantity);
                         cmd.Parameters.AddWithValue("@detail_price", order.product_price);
                         cmd.Parameters.AddWithValue("@detail_total", order.total);
+                        cmd.Parameters.AddWithValue("@date", DateTime.Now);
                         //MessageBox.Show("in1 "+order.product_id.ToString()+" "+order_id+" "+order.quantity+" ");
                         cmd.ExecuteNonQuery();
                         cmd.Parameters.Clear();

@@ -1,16 +1,23 @@
-﻿<Page x:Class="WPF_POS.Pages.SalesReport"
+﻿<Page
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:WPF_POS.Pages"
-      xmlns:BoldReports="clr-namespace:BoldReports.UI.Xaml;assembly=BoldReports.Wpf"
-      mc:Ignorable="d" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="WPF_POS.Pages.SalesReport" 
+    mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SalesReport">
 
     <Grid>
-        <BoldReports:ReportViewer Name="ReportView" />
+        <DataGrid x:Name="sales" HorizontalAlignment="Left" Height="310" VerticalAlignment="Top" Width="708" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="62,0,0,0"/>
+        <RadioButton x:Name="daily" Content="Daily" HorizontalAlignment="Left" Height="36" Margin="42,414,0,0" VerticalAlignment="Top" Width="108" Checked="daily_Checked"/>
+        <RadioButton x:Name="weekly" Content="Weekly" HorizontalAlignment="Left" Height="36" Margin="189,414,0,0" VerticalAlignment="Top" Width="108" Checked="weekly_Checked"/>
+        <RadioButton x:Name="monthly" Content="Monthly" HorizontalAlignment="Left" Height="36" Margin="308,414,0,0" VerticalAlignment="Top" Width="108" Checked="monthly_Checked"/>
+        <DatePicker x:Name="from" HorizontalAlignment="Left" Height="46" Margin="78,315,0,0" VerticalAlignment="Top" Width="130"/>
+        <DatePicker x:Name="to" HorizontalAlignment="Left" Height="46" Margin="243,315,0,0" VerticalAlignment="Top" Width="130"/>
+        <Button x:Name="show" Content="Button" HorizontalAlignment="Left" Height="46" Margin="416,315,0,0" VerticalAlignment="Top" Width="141" Click="show_Click"/>
+        <Label x:Name="total" Content="" HorizontalAlignment="Left" Height="46" Margin="582,315,0,0" VerticalAlignment="Top" Width="90"/>
+
 
     </Grid>
 </Page>
