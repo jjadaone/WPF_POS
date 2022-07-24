@@ -34,7 +34,7 @@ namespace WPF_POS.Pages
 
         public void loadData()
         {
-            SqlCommand cmd = new SqlCommand("SELECT * FROM tblsupplier", con);
+            SqlCommand cmd = new SqlCommand("SELECT supplier_id AS 'SUPPLIER ID', supplier_name AS 'SUPPLIER NAME', supplier_address AS 'ADDRESS' FROM tblsupplier", con);
             DataTable dt = new DataTable();
             con.Open();
             SqlDataReader sdr = cmd.ExecuteReader();
