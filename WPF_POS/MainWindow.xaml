@@ -7,12 +7,12 @@
         xmlns:local="clr-namespace:WPF_POS"
         mc:Ignorable="d"
         Title="POS" Height="600" Width="920" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
-    <Border Background="#616161" CornerRadius="20">
-        
-        <Grid>
-            
+    <Border Background="#864841" CornerRadius="20">
+
+        <Grid MouseDown="Border_MouseDown">
+
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition MouseDown="Border_MouseDown" Width="200"></ColumnDefinition>
                 <ColumnDefinition ></ColumnDefinition>
 
             </Grid.ColumnDefinitions>
@@ -20,11 +20,16 @@
                 <RowDefinition Height="75"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            
 
-            <TextBlock Text="ADMIN DASHBOARD" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="17" Margin="20 0 0 0"></TextBlock>
-            <StackPanel Grid.Row="1" Background="#607D8B" HorizontalAlignment="Left" Height="414" VerticalAlignment="Center" Width="180" Margin="10,0,0,0">
-                <Button Background="#607D8B" Height="41" Width="180" Click="btnHomeClick" >
+            <Border  Margin="5" Padding="5" BorderThickness="1"  Background="RosyBrown" CornerRadius="10">
+                <TextBlock Text="ADMIN DASHBOARD" VerticalAlignment="Center" Foreground="White" FontSize="17" Margin="10,0,10,0">
+
+                </TextBlock>
+            </Border>
+
+
+            <StackPanel Grid.Row="1"  HorizontalAlignment="Left" Height="414" VerticalAlignment="Center" Width="180" Margin="10,0,0,0">
+                <Button BorderThickness="1" BorderBrush="black" Height="50" Width="180" Click="btnHomeClick" >
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="156">
                         <materialDesign:PackIcon  Kind="Home"  Height="25" Width="25" VerticalAlignment="Center"/>
                         <TextBlock Text="HOME" VerticalAlignment="Center" Margin="20 10"></TextBlock>
@@ -32,63 +37,62 @@
 
                 </Button>
 
-                <Button Background="#607D8B"  Height="41" Width="180" Click="btnProductClick">
+                <Button BorderThickness="1" BorderBrush="black" Height="50" Width="180" Click="btnProductClick">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="156">
                         <materialDesign:PackIcon  Kind="AlphabetPCircle"  Height="25" Width="25" VerticalAlignment="Center"/>
                         <TextBlock Text="PRODUCTS" VerticalAlignment="Center" Margin="20 10"></TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Background="#607D8B" Content="Search Products" Height="41" Width="180" Click="btnSearchClick"/>
-                <Button Background="#607D8B"  Height="41" Width="180" Click="btnStockinClick">
+
+                <Button BorderThickness="1" BorderBrush="black" Height="50" Width="180" Click="btnStockinClick">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="156">
                         <materialDesign:PackIcon  Kind="Cash"  Height="25" Width="25" VerticalAlignment="Center"/>
                         <TextBlock Text="STOCKINGS" VerticalAlignment="Center" Margin="20 10"></TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Background="#607D8B" Height="41" Width="180" Click="btnPurchaseOrderClick">
+                <Button BorderThickness="1" BorderBrush="black" Height="45" Width="180" Click="btnPurchaseOrderClick">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="156">
                         <materialDesign:PackIcon  Kind="OrderCheckboxAscending"  Height="25" Width="25" VerticalAlignment="Center"/>
                         <TextBlock Text="ORDER" VerticalAlignment="Center" Margin="20 10"></TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Background="#607D8B"  Height="41" Width="180" Click="btnCategoryClick">
+                <Button BorderThickness="1" BorderBrush="black"  Height="45" Width="180" Click="btnCategoryClick">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="156">
                         <materialDesign:PackIcon  Kind="Category"  Height="25" Width="25" VerticalAlignment="Center"/>
                         <TextBlock Text="CATEGORY" VerticalAlignment="Center" Margin="20 10"></TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Background="#607D8B" Height="41" Width="180" Click="btnSupplierClick">
+                <Button BorderThickness="1" BorderBrush="black"  Height="50" Width="180" Click="btnSupplierClick">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="156">
                         <materialDesign:PackIcon  Kind="Support"  Height="25" Width="25" VerticalAlignment="Center"/>
                         <TextBlock Text="SUPPLIER" VerticalAlignment="Center" Margin="20 10"></TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Background="#607D8B" Height="41" Width="180" Click="btnUserClick">
+                <Button BorderThickness="1" BorderBrush="black" Height="45" Width="180" Click="btnUserClick">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="156">
                         <materialDesign:PackIcon  Kind="User"  Height="25" Width="25" VerticalAlignment="Center"/>
                         <TextBlock Text="USER" VerticalAlignment="Center" Margin="20 10"></TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Background="#607D8B" Content="Sales Report" Height="41" Width="180" Click="btnSalesReportClick"/>
-                <Button Background="#607D8B" Content="Inventory Report" Height="41" Width="180" Click="btnInventoryReportClick" />
+                <Button  Content="Sales Report" Height="41" Width="180" Click="btnSalesReportClick"/>
+                <Button Content="Inventory Report" Height="41" Width="180" Click="btnInventoryReportClick" />
             </StackPanel>
             <ContentControl Grid.Row="1" Grid.Column="1" Margin="0,10,10,10">
                 <Frame Background="#F5F5F5" x:Name="Main" Content="" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Height="414" Margin="5,0,0,0" VerticalAlignment="Center" Width="690" Navigated="Main_Navigated"></Frame>
             </ContentControl>
 
 
-            <Border Grid.Column="1" Margin="5" Padding="5" BorderThickness="1"  Background="#9E9E9E" CornerRadius="10">
-                <TextBlock  />
+            <Border Grid.Column="1" Margin="5" Padding="5" BorderThickness="1"  Background="RosyBrown" CornerRadius="10">
+                <TextBlock Text="CHOCOLATE STORE" FontWeight="Bold" VerticalAlignment="center" HorizontalAlignment="center" FontSize="40" ></TextBlock>
             </Border>
 
-            <Button Background="#607D8B" Margin="520,22,35,21" Grid.Column="1">
+            <Button x:Name="exitApp" Margin="630,22,35,21" Grid.Column="1" Click="exitApp_Click">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="115" Height="40">
-                    <materialDesign:PackIcon  Kind="User"  Height="25" Width="25" VerticalAlignment="Center"/>
-                    <TextBlock Text="LOGOUT" VerticalAlignment="Center" Margin="20 10"></TextBlock>
+                    <materialDesign:PackIcon  Kind="ExitToApp"  Height="25" Width="25" VerticalAlignment="Center"/>
+                   
                 </StackPanel>
             </Button>
-            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1, 0, 0, 0" Background="{x:Null}">
-            </Border>
+            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0, 0, 0, 1" Background="{x:Null}"/>
             <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0, 1, 1, 0" Background="{x:Null}">
             </Border>
 

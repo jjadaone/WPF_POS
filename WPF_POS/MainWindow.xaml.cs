@@ -87,6 +87,19 @@ namespace WPF_POS
         {
             
         }
-      
+
+        private void Border_ContextMenuClosing(object sender, ContextMenuEventArgs e)
+        {
+            
+        }
+        private void Border_MouseDown(object sender, RoutedEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void exitApp_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

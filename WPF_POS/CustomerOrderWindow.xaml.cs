@@ -53,7 +53,7 @@ namespace WPF_POS
 
         public void loadProducts()
         {
-            SqlCommand cmd = new SqlCommand("SELECT * FROM tblproduct", con);
+            SqlCommand cmd = new SqlCommand("SELECT product_id, product_name, product_description, product_quantity FROM tblproduct", con);
             DataTable dt = new DataTable();
             con.Open();
             SqlDataReader sdr = cmd.ExecuteReader();
@@ -213,6 +213,7 @@ namespace WPF_POS
             finally
             {
                 con.Close();
+                loadProducts();
             }
         }
 
@@ -395,5 +396,11 @@ namespace WPF_POS
                 MessageBox.Show("Error1");
             }
         }
+
+        private void exitApp(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+       
     }
 }

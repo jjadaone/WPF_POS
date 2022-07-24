@@ -23,6 +23,9 @@ namespace WPF_POS
     /// </summary>
     public partial class Login : Window
     {
+
+        SqlCommand com = new SqlCommand();
+        SqlDataReader dr;
         public Login()
         {
             InitializeComponent();
@@ -30,15 +33,28 @@ namespace WPF_POS
 
         SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         CustomerOrderWindow sales = new CustomerOrderWindow();
+        MainWindow admin = new MainWindow();
         private void btnLoginClick(object sender, RoutedEventArgs e)
         {
-            try
+            if (con.State == System.Data.ConnectionState.Open)
+            {
+                con.Close();
+            }
+            if (VerifyUser(username.Text, password.Password))
+            {
+                MessageBox.Show("Login Successfully", "Congrats", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Username or password is incorrect", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            /*try
             {
                 string sql = @"SELECT * FROM tbluser WHERE username=@username AND password=@password";
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.AddWithValue("@username", username.Text);
-                cmd.Parameters.AddWithValue("@password", password.Text);
+                cmd.Parameters.AddWithValue("@password", password.Password);
                 con.Open();
                 //MessageBox.Show(username.Text, password.Text);
 
@@ -65,6 +81,36 @@ namespace WPF_POS
             finally
             {
                 con.Close();
+            } */
+        }
+        private bool VerifyUser(string username, string password)
+        {
+            con.Open();
+            com.Connection = con;
+            com.CommandText = "select role from tbluser where username='" + username + "' and password='" + password + "'";
+            dr = com.ExecuteReader();
+            if (dr.Read())
+            {
+                if ((dr["role"]).ToString() == "Administrator" )
+                {
+                    this.Close();
+                    admin.Show();
+                    return true;
+                }
+                else if ((dr["role"]).ToString() == "Cashier")
+                {
+                    this.Close();
+                    sales.Show();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
             }
         }
 
