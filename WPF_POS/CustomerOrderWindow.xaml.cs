@@ -43,8 +43,8 @@ namespace WPF_POS
 
         }
 
-        SqlConnection con = new SqlConnection(@"Data Source=(localdb)\ProjectModels;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-        //SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        //SqlConnection con = new SqlConnection(@"Data Source=(localdb)\ProjectModels;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         //ObservableCollection<Orders> model = new ObservableCollection<Orders>();
         List<Orders> model = new List<Orders>();
 
@@ -53,14 +53,13 @@ namespace WPF_POS
 
         public void loadProducts()
         {
-            SqlCommand cmd = new SqlCommand("SELECT product_id, product_name, product_description, product_quantity FROM tblproduct", con);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM tblproduct", con);
             DataTable dt = new DataTable();
             con.Open();
             SqlDataReader sdr = cmd.ExecuteReader();
             dt.Load(sdr);
             con.Close();
             products.ItemsSource = dt.DefaultView;
-
         }
         public void loadOrders()
         {
@@ -109,7 +108,6 @@ namespace WPF_POS
                 MessageBox.Show("Error", model.Count.ToString());
             }
         }
-        
         private void btnCalculateClick(object sender, RoutedEventArgs e)
         {
             try
@@ -145,11 +143,11 @@ namespace WPF_POS
                     balance.Text = (cashv - totalv).ToString();
                 else if (totalv > cashv)
                     MessageBox.Show("Invalid payment amount.");
-                    
-                    
+
+
 
             }
-             catch
+            catch
             {
                 MessageBox.Show("Please input an amount.");
             }
@@ -160,7 +158,7 @@ namespace WPF_POS
             try
             {
                 string sql = "INSERT INTO tblsalesorder(sales_order_date, total, cash, balance) VALUES (@sales_order_date, @total, @cash, @balance) SELECT SCOPE_IDENTITY()";
-                string sql_add = "INSERT INTO tblsalesorderdetail(product_id, sales_order_id, sales_order_detail_quantity, sales_order_detail_price, sales_order_detail_total, date) VALUES (@product_id, @order_id, @detail_quantity, @detail_price, @detail_total, @date)";
+                string sql_add = "INSERT INTO tblsalesorderdetail(product_id, sales_order_id, sales_order_detail_quantity, sales_order_detail_price, sales_order_detail_total) VALUES (@product_id, @order_id, @detail_quantity, @detail_price, @detail_total)";
                 string sql_dec = "UPDATE tblproduct SET product_quantity = product_quantity - @detail_quantity WHERE product_id = @product_id ";
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.CommandType = CommandType.Text;
@@ -184,7 +182,6 @@ namespace WPF_POS
                         cmd.Parameters.AddWithValue("@detail_quantity", order.quantity);
                         cmd.Parameters.AddWithValue("@detail_price", order.product_price);
                         cmd.Parameters.AddWithValue("@detail_total", order.total);
-                        cmd.Parameters.AddWithValue("@date", DateTime.Now);
                         //MessageBox.Show("in1 "+order.product_id.ToString()+" "+order_id+" "+order.quantity+" ");
                         cmd.ExecuteNonQuery();
                         cmd.Parameters.Clear();
@@ -377,7 +374,7 @@ namespace WPF_POS
                             product_quantity = Convert.ToInt32(order.product_quantity)
                         });
                         //MessageBox.Show("added");
-                    } 
+                    }
                     //else
                     //{
                     //    MessageBox.Show("null");
@@ -391,12 +388,11 @@ namespace WPF_POS
                 total.Text = null;
                 loadOrders();
             }
-            catch 
+            catch
             {
                 MessageBox.Show("Error1");
             }
         }
-
         private void exitApp(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();

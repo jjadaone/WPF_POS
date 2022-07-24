@@ -9,8 +9,11 @@
       Title="InventoryReport">
 
     <Grid>
-        <DataGrid x:Name="datagrid" HorizontalAlignment="Center" Height="274" Margin="0,139,0,0" VerticalAlignment="Top" Width="616" d:ItemsSource="{d:SampleData ItemCount=5}"/>
-        <Label Content="INVENTORY REPORT" HorizontalAlignment="Center" Height="71" Margin="0,24,0,0" VerticalAlignment="Top" Width="454"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="10,10,10,10">
+
+        </Border>
+        <DataGrid x:Name="datagrid" HorizontalAlignment="Center" Height="274" VerticalAlignment="Center" Width="616" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <Label Content="INVENTORY REPORT" HorizontalAlignment="Center" Height="45" Margin="0,25,0,0" VerticalAlignment="Top" FontSize="30" FontWeight="Black" Width="320"/>
 
     </Grid>
 </Page>
