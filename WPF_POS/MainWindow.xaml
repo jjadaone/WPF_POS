@@ -28,7 +28,7 @@
             </Border>
 
 
-            <StackPanel Grid.Row="1"  HorizontalAlignment="Left" Height="414" VerticalAlignment="Center" Width="180" Margin="10,0,0,0">
+            <StackPanel Grid.Row="1"  HorizontalAlignment="Center" Height="426" VerticalAlignment="Center" Width="180">
                 <Button BorderThickness="1" BorderBrush="black" Height="50" Width="180" Click="btnHomeClick" >
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="156">
                         <materialDesign:PackIcon  Kind="Home"  Height="25" Width="25" VerticalAlignment="Center"/>
@@ -74,8 +74,18 @@
                         <TextBlock Text="USER" VerticalAlignment="Center" Margin="20 10"></TextBlock>
                     </StackPanel>
                 </Button>
-                <Button  Content="Sales Report" Height="41" Width="180" Click="btnSalesReportClick"/>
-                <Button Content="Inventory Report" Height="41" Width="180" Click="btnInventoryReportClick" />
+                <Button BorderThickness="1" BorderBrush="black" Height="41" Width="180" Click="btnSalesReportClick">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="156">
+                        <materialDesign:PackIcon  Kind="PointOfSale"  Height="25" Width="25" VerticalAlignment="Center"/>
+                        <TextBlock Text="SALES REPORT" VerticalAlignment="Center" Margin="20 10"></TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button BorderThickness="1" BorderBrush="black"  Height="41" Width="180" Click="btnInventoryReportClick">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="156">
+                        <materialDesign:PackIcon  Kind="Storage"  Height="25" Width="25" VerticalAlignment="Center"/>
+                        <TextBlock Text="INVENTORY REP" VerticalAlignment="Center" Margin="20 10"></TextBlock>
+                    </StackPanel>
+                </Button>
             </StackPanel>
             <ContentControl Grid.Row="1" Grid.Column="1" Margin="0,10,10,10">
                 <Frame Background="#F5F5F5" x:Name="Main" Content="" NavigationUIVisibility="Hidden" HorizontalAlignment="Left" Height="414" Margin="5,0,0,0" VerticalAlignment="Center" Width="690" Navigated="Main_Navigated"></Frame>
@@ -89,7 +99,7 @@
             <Button x:Name="exitApp" Margin="630,22,35,21" Grid.Column="1" Click="exitApp_Click">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="115" Height="40">
                     <materialDesign:PackIcon  Kind="ExitToApp"  Height="25" Width="25" VerticalAlignment="Center"/>
-                   
+
                 </StackPanel>
             </Button>
             <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0, 0, 0, 1" Background="{x:Null}"/>
