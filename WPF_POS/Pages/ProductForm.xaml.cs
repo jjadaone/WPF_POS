@@ -33,7 +33,10 @@ namespace WPF_POS.Pages
             fill_combo();
             PID_combo();
         }
-        SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+        SqlConnection con = new SqlConnection(@"Data Source=(localdb)\ProjectModels;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+        //SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         string imgLoc = "";
        
         private void CBCat_DropDownClosed(object sender, EventArgs e)
@@ -206,7 +209,7 @@ namespace WPF_POS.Pages
             //sdr.Close();
             //DataGrid.ItemsSource = dt.DefaultView;
             //con.Close();
-           SqlCommand cmd = new SqlCommand("SELECT * FROM tblproduct", con);
+           SqlCommand cmd = new SqlCommand("SELECT product_id AS 'ID', product_name AS 'NAME', product_price AS 'PRICE' FROM tblproduct", con);
             DataTable dt = new DataTable();
             con.Open();
             SqlDataReader sdr = cmd.ExecuteReader();

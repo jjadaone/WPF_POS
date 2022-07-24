@@ -19,7 +19,7 @@
             <RowDefinition Height="225"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Border Background="IndianRed" Margin="10,10,10,10">
+        <Border Background="#7A4069" Margin="10,10,10,10">
             <Canvas>
                 <TextBlock Text="SALES" FontSize="40" FontWeight="Black" HorizontalAlignment="Center" Canvas.Left="10" VerticalAlignment="Top" Canvas.Top="10"></TextBlock>
                 <materialDesign:PackIcon Kind="PhilippinePeso" Height="70" Width="50" Canvas.Left="10" Canvas.Top="59" VerticalAlignment="Center"></materialDesign:PackIcon>
@@ -29,7 +29,7 @@
 
 
         </Border>
-        <Border Background="LightYellow"  Grid.Column="1" Margin="0,10,10,10">
+        <Border Background="#0096FF"  Grid.Column="1" Margin="0,10,10,10">
             <Canvas>
                 <TextBlock Text="RETURNED" FontSize="40" FontWeight="Black" HorizontalAlignment="Left" Canvas.Left="10" VerticalAlignment="Center" Canvas.Top="10"></TextBlock>
 
@@ -39,7 +39,7 @@
             </Canvas>
 
         </Border>
-        <Border Background="DeepSkyBlue" Grid.Row="1" Margin="10,0,10,10">
+        <Border Background="#00D7FF" Grid.Row="1" Margin="10,0,10,10">
             <Canvas>
                 <TextBlock Text="STOCKS" FontSize="40" FontWeight="Black" HorizontalAlignment="Left" Canvas.Left="10" VerticalAlignment="Center" Canvas.Top="10"></TextBlock>
                 <materialDesign:PackIcon Kind="Storage" Height="70" Width="50" Canvas.Left="10" Canvas.Top="59" VerticalAlignment="Center"></materialDesign:PackIcon>
@@ -50,7 +50,7 @@
             </Canvas>
 
         </Border>
-        <Border Background="LightSeaGreen" Grid.Column="1" Grid.Row="1" Margin="0,0,10,10">
+        <Border Background="#72FFFF" Grid.Column="1" Grid.Row="1" Margin="0,0,10,10">
             <Canvas>
                 <TextBlock Text="EXCHANGED" FontSize="40" FontWeight="Black" HorizontalAlignment="Left" Canvas.Left="10" VerticalAlignment="Center" Canvas.Top="10"></TextBlock>
                 <materialDesign:PackIcon Kind="SwapVertical" Height="70" Width="50" Canvas.Left="10" Canvas.Top="59" VerticalAlignment="Center"></materialDesign:PackIcon>

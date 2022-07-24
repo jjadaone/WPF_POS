@@ -29,12 +29,12 @@ namespace WPF_POS.Pages
             loadReceived();
         }
 
-        SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-        //SqlConnection con = new SqlConnection(@"Data Source=(localdb)\ProjectModels;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        //SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        SqlConnection con = new SqlConnection(@"Data Source=(localdb)\ProjectModels;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
         public void loadOrders()
         {
-            string sql = "SELECT purchase_order_id, supplier_name, tblproduct.product_id, product_name, order_date, purchase_order_quantity, purchase_order_total  FROM tblpurchaseorder INNER JOIN tblsupplier ON tblsupplier.supplier_id=tblpurchaseorder.supplier_id INNER JOIN tblproduct ON tblproduct.product_id=tblpurchaseorder.product_id WHERE tblpurchaseorder.status = 'Ordered'";
+            string sql = "SELECT purchase_order_id AS 'PURCHASE ID', supplier_name AS SUPPLIER, tblproduct.product_id AS 'PRODUCT', product_name AS 'NAME', order_date AS 'ORDER DATE', purchase_order_quantity AS QUANTITY, purchase_order_total AS TOTAL  FROM tblpurchaseorder INNER JOIN tblsupplier ON tblsupplier.supplier_id=tblpurchaseorder.supplier_id INNER JOIN tblproduct ON tblproduct.product_id=tblpurchaseorder.product_id WHERE tblpurchaseorder.status = 'Ordered'";
             SqlCommand cmd = new SqlCommand(sql, con);
             DataTable dt = new DataTable();
             con.Open();
@@ -46,7 +46,7 @@ namespace WPF_POS.Pages
 
         public void loadReceived()
         {
-            string sql = "SELECT supplier_name, product_name, order_date, received_date, purchase_order_quantity, purchase_order_total  FROM tblpurchaseorder INNER JOIN tblsupplier ON tblsupplier.supplier_id=tblpurchaseorder.supplier_id INNER JOIN tblproduct ON tblproduct.product_id=tblpurchaseorder.product_id WHERE tblpurchaseorder.status = 'Received'";
+            string sql = "SELECT supplier_name AS SUPPLIER, product_name AS NAME, order_date AS 'ORDER DATE', received_date AS 'RECEIVED DATE', purchase_order_quantity AS QUANTITY, purchase_order_total AS TOTAL  FROM tblpurchaseorder INNER JOIN tblsupplier ON tblsupplier.supplier_id=tblpurchaseorder.supplier_id INNER JOIN tblproduct ON tblproduct.product_id=tblpurchaseorder.product_id WHERE tblpurchaseorder.status = 'Received'";
             SqlCommand cmd = new SqlCommand(sql, con);
             DataTable dt = new DataTable();
             con.Open();
