@@ -31,7 +31,7 @@ namespace WPF_POS
 
         private void btnHomeClick(object sender, RoutedEventArgs e)
         {
-
+            Main.Content = new Dashboard();
         }
 
         private void btnProductClick(object sender, RoutedEventArgs e)
@@ -71,12 +71,12 @@ namespace WPF_POS
 
         private void btnSalesReportClick(object sender, RoutedEventArgs e)
         {
-
+            Main.Content = new SalesReport();
         }
 
         private void btnInventoryReportClick(object sender, RoutedEventArgs e)
         {
-            Main.Content = new Refund();
+            Main.Content = new InventoryReport();
         }
 
         private void Main_Navigated(object sender, NavigationEventArgs e)
