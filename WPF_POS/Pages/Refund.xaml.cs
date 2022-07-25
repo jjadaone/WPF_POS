@@ -81,7 +81,7 @@ namespace WPF_POS.Pages
             try
             {
                 string purchase_id = purchase.SelectedItem.ToString();
-                string sql = "SELECT pd.product_id, supplier_name, product_quantity, product_price, purchase_order_quantity FROM tblpurchaseorder AS po INNER JOIN tblproduct AS pd ON pd.product_id=po.product_id INNER JOIN tblsupplier as s ON s.supplier_id=po.supplier_id WHERE po.purchase_order_id=@purchase_order_id ";
+                string sql = "SELECT pd.product_id, supplier_name, product_quantity, product_price, purchase_order_quantity, product_name FROM tblpurchaseorder AS po INNER JOIN tblproduct AS pd ON pd.product_id=po.product_id INNER JOIN tblsupplier as s ON s.supplier_id=po.supplier_id WHERE po.purchase_order_id=@purchase_order_id ";
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.Parameters.AddWithValue("purchase_order_id", purchase_id);
                 con.Open();
@@ -94,7 +94,7 @@ namespace WPF_POS.Pages
                 int supplier_name = reader.GetOrdinal("supplier_name");
                 int p_price = reader.GetOrdinal("product_price");
                 int po_quantity = reader.GetOrdinal("purchase_order_quantity");
-
+                int p_name = reader.GetOrdinal("product_name");
 
                 if (!reader.Read())
                     throw new InvalidOperationException("No records");
@@ -106,7 +106,7 @@ namespace WPF_POS.Pages
                     decimal product_price = reader.GetDecimal(p_price);
                     refund_quantity.Text = reader.GetInt32(po_quantity).ToString();
                     reader.Close();
-                    cmd.CommandText = "select product_id from tblproduct where product_price=@p_price and product_id!=@p_id";
+                    cmd.CommandText = "select product_id, product_name from tblproduct where product_price=@p_price and product_id!=@p_id";
                     cmd.Parameters.AddWithValue("@p_price", product_price);
                     cmd.Parameters.AddWithValue("@p_id", pd_id);
                     SqlDataReader sdr = cmd.ExecuteReader();
@@ -114,14 +114,16 @@ namespace WPF_POS.Pages
                     while (sdr.Read())
                     {
                         int id = sdr.GetInt32(0);
-                        product.Items.Add(id);
+                        string name = sdr.GetString(1);
+                        product.Items.Add(String.Format("{0} - {1}", id, name));
                     }
                 }
                 else if (refund.IsChecked == true)
                 {
                     int id = reader.GetInt32(p_id);
+                    string name = reader.GetString(p_name);
                     product.Items.Clear();
-                    product.Items.Add(id);
+                    product.Items.Add(String.Format("{0} - {1}", id, name));
                 }
 
             }
@@ -165,7 +167,7 @@ namespace WPF_POS.Pages
                     cmd.CommandText = sql_update;
                     cmd.Parameters.AddWithValue("@refund_quantity", refund_quantity.Text);
                     //cmd.Parameters.AddWithValue("@product_id", product.Text);
-                    cmd.Parameters.AddWithValue("@product_id", product.SelectedItem.ToString());
+                    cmd.Parameters.AddWithValue("@product_id", product.SelectedItem.ToString().Split(" ")[0]);
                     cmd.ExecuteNonQuery();
                     cmd.Parameters.Clear();
                     MessageBox.Show("Refunded");
@@ -185,14 +187,14 @@ namespace WPF_POS.Pages
                     cmd.CommandText = sql_updatepd;
                     cmd.Parameters.AddWithValue("@refund_quantity", refund_quantity.Text);
                     //cmd.Parameters.AddWithValue("@product_id", product.Text);
-                    cmd.Parameters.AddWithValue("@product_id", product.SelectedItem.ToString());
+                    cmd.Parameters.AddWithValue("@product_id", product.SelectedItem.ToString().Split(" ")[0]);
                     cmd.ExecuteNonQuery();
                     cmd.Parameters.Clear();
 
                     string sql_updatepurchase = "UPDATE tblpurchaseorder SET product_id=@new_product_id, status=@new_status WHERE purchase_order_id=@purchase_id";
                     cmd.CommandText = sql_updatepurchase;
                     //cmd.Parameters.AddWithValue("@new_product_id", product.Text);
-                    cmd.Parameters.AddWithValue("@new_product_id", product.SelectedItem.ToString());
+                    cmd.Parameters.AddWithValue("@new_product_id", product.SelectedItem.ToString().Split(" ")[0]);
                     cmd.Parameters.AddWithValue("@new_status", "Ordered");
                     cmd.Parameters.AddWithValue("@purchase_id", purchase_id);
                     cmd.ExecuteNonQuery();
@@ -218,6 +220,8 @@ namespace WPF_POS.Pages
 
         private void returncheck(object sender, RoutedEventArgs e)
         {
+            refund_quantity.Text = null;
+            product.Items.Clear();
 
             supplier.Text = null;
             purchase.SelectedIndex = -1;
@@ -230,6 +234,9 @@ namespace WPF_POS.Pages
 
         private void exchangecheck(object sender, RoutedEventArgs e)
         {
+            product.Items.Clear();
+            refund_quantity.Text = null;
+
             supplier.Text = null;
             purchase.SelectedIndex = -1;
             product.SelectedIndex = -1;
