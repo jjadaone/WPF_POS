@@ -20,7 +20,25 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <DataGrid Grid.Row="1"  x:Name="products" HorizontalAlignment="Left" Height="436" VerticalAlignment="Top" Width="353" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="ProductDoubleClick" BorderThickness="1" BorderBrush="black" Grid.Column="1" Margin="0,10,0,0"/>
+        <DataGrid IsReadOnly="True" Grid.Row="1" AutoGenerateColumns="False" x:Name="products" HorizontalAlignment="Left" Height="436" VerticalAlignment="Top" Width="353" MouseDoubleClick="ProductDoubleClick" BorderThickness="1" BorderBrush="black" Grid.Column="1" Margin="0,10,0,0">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="IMAGE">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding product_image}" Height="80" Width="80"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTextColumn Header="PRODUCT ID" Binding="{Binding product_id}" />
+                <DataGridTextColumn Header="NAME" Binding="{Binding product_name}" />
+                <DataGridTextColumn Header="CATEGORY" Binding="{Binding category_name}" />
+                <DataGridTextColumn Header="QUANTITY" Binding="{Binding product_quantity}" />
+                <DataGridTextColumn Header="PRICE" Binding="{Binding product_price}" />
+
+            </DataGrid.Columns>
+        </DataGrid>
+
 
         <DataGrid Grid.Row="1" x:Name="orders" HorizontalAlignment="Left" Height="436" Margin="358,10,0,0" VerticalAlignment="Top" Width="373" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDoubleClick="OrderDoubleClick" BorderThickness="1" BorderBrush="black" Grid.Column="1"/>
 

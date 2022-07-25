@@ -43,17 +43,17 @@ namespace WPF_POS
 
         }
 
-        //SqlConnection con = new SqlConnection(@"Data Source=(localdb)\ProjectModels;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-        SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        SqlConnection con = new SqlConnection(@"Data Source=(localdb)\ProjectModels;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        //SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         //ObservableCollection<Orders> model = new ObservableCollection<Orders>();
         List<Orders> model = new List<Orders>();
 
 
         int order_id;
-
+        
         public void loadProducts()
         {
-            SqlCommand cmd = new SqlCommand("SELECT * FROM tblproduct", con);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM tblproduct INNER JOIN tblcategory ON tblcategory.category_id=tblproduct.category_id", con);
             DataTable dt = new DataTable();
             con.Open();
             SqlDataReader sdr = cmd.ExecuteReader();
@@ -77,7 +77,6 @@ namespace WPF_POS
 
                 DataRowView row = products.SelectedItem as DataRowView;
                 int pid = Convert.ToInt32(row.Row.ItemArray[0]);
-
 
                 var found = model.FirstOrDefault(x => x.product_id == pid);
                 if (found != null)
@@ -267,7 +266,7 @@ namespace WPF_POS
                 sb.Append(System.Environment.NewLine);
                 sb.AppendLine("THANK YOU!");
 
-                MessageBox.Show(sb.ToString());
+                //MessageBox.Show(sb.ToString());
 
                 ReceiptWindow rw = new ReceiptWindow(sb.ToString());
                 //rw.DataContext = this;
