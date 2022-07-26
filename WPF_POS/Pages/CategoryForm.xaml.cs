@@ -33,7 +33,7 @@ namespace WPF_POS.Pages
 
         public void loadData()
         {
-            SqlCommand cmd = new SqlCommand("SELECT * FROM tblcategory", con);
+            SqlCommand cmd = new SqlCommand("SELECT category_id AS 'ID', category_name AS 'NAME', category_desc AS 'DESCRIPTION' FROM tblcategory", con);
             DataTable dt = new DataTable();
             con.Open();
             SqlDataReader sdr = cmd.ExecuteReader();
@@ -46,6 +46,7 @@ namespace WPF_POS.Pages
         {
             txtCategory.Clear();
             txtDesc.Clear();
+            CBCatID.Items.Clear();
            
 
         }

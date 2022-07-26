@@ -20,9 +20,9 @@
         <Label x:Name="lblCategory" Content="Category ID:" HorizontalAlignment="Left" Margin="32,37,0,0" VerticalAlignment="Top" Height="26" Width="75"/>
         <Label x:Name="lblProductDesc" Content="Description:" HorizontalAlignment="Left" Margin="32,131,0,0" VerticalAlignment="Top" Height="26" Width="73"/>
         <TextBox x:Name="txtDesc" HorizontalAlignment="Left" Margin="112,135,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="40"/>
-        <Label x:Name="lblProductQty" Content="Quantity:" HorizontalAlignment="Left" Margin="35,185,0,0" VerticalAlignment="Top" Height="26" Width="58"/>
+        <Label x:Name="lblProductQty" Content="Quantity:" HorizontalAlignment="Left" Margin="35,185,0,0" VerticalAlignment="Top" Height="26" Width="58" Visibility="Hidden"/>
         <Label x:Name="lblPrice" Content="Price:" HorizontalAlignment="Left" Margin="253,80,0,0" VerticalAlignment="Top" Width="44" Height="26"/>
-        <TextBox x:Name="txtQty" HorizontalAlignment="Left" Margin="112,185,0,0" PreviewTextInput="txtQty_PreviewTextInput" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="26"/>
+        <TextBox x:Name="txtQty" HorizontalAlignment="Left" Margin="112,185,0,0" PreviewTextInput="txtQty_PreviewTextInput"  TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" Height="26" Visibility="Hidden"/>
         <TextBox x:Name="txtPrice" HorizontalAlignment="Left" Margin="319,80,0,0" PreviewTextInput="txtPrice_PreviewTextInput" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="87" Height="26"/>
         <DataGrid x:Name="DataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="430,0,20,0" Height="340" VerticalAlignment="Center"/>
         <Button  Background="#607D8B" x:Name="AddProdBtn" Content="ADD" HorizontalAlignment="Left" Margin="46,345,0,0" VerticalAlignment="Top" Height="50" Width="70" Click="AddProdBtn_Click"/>
@@ -34,7 +34,7 @@
         <Button  Background="#607D8B" x:Name="ClrBtn" Content="CLEAR" HorizontalAlignment="Left" Margin="210,345,0,0" VerticalAlignment="Top" Height="50" Width="78" Click="ClrBtn_Click"/>
         <Label x:Name="lblProductImage" Content="Image:" HorizontalAlignment="Left" Margin="253,138,0,0" VerticalAlignment="Top" Height="26" Width="58"/>
         <Image x:Name="ImgProduct" HorizontalAlignment="Left" Height="127" Margin="253,175,0,0" VerticalAlignment="Top" Width="166"/>
-        <Button x:Name="BrowseBtn" Content="Browse" HorizontalAlignment="Left" Margin="319,132,0,0" VerticalAlignment="Top" Click="BrowseBtn_Click"/>
+        <Button  Background="#607D8B" x:Name="BrowseBtn" Content="Browse" HorizontalAlignment="Left" Margin="319,132,0,0" VerticalAlignment="Top" Click="BrowseBtn_Click"/>
 
     </Grid>
 </Page>

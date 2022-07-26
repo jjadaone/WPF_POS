@@ -9,12 +9,12 @@
       Title="SupplierForm">
 
     <Grid>
-        <Label Content="Supplier Name:" HorizontalAlignment="Left" Margin="20,24,0,0" VerticalAlignment="Top"/>
-        <Label Content="Supplier Contact:" HorizontalAlignment="Left" Margin="20,65,0,0" VerticalAlignment="Top"/>
-        <Label Content="Supplier Address:" HorizontalAlignment="Left" Margin="20,104,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtSname" HorizontalAlignment="Left" Margin="145,28,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="22"/>
-        <TextBox x:Name="txtScontact" HorizontalAlignment="Left" Margin="145,67,0,0" PreviewTextInput="txtScontact_PreviewTextInput"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="22"/>
-        <TextBox x:Name="txtSaddress" HorizontalAlignment="Left" Margin="145,108,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="22"/>
+        <Label Content="Supplier Name:" HorizontalAlignment="Left" Margin="20,37,0,0" VerticalAlignment="Top"/>
+        <Label Content="Supplier Contact:" HorizontalAlignment="Left" Margin="20,96,0,0" VerticalAlignment="Top"/>
+        <Label Content="Supplier Address:" HorizontalAlignment="Left" Margin="20,208,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtSname" HorizontalAlignment="Left" Margin="145,28,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="34"/>
+        <TextBox x:Name="txtScontact" HorizontalAlignment="Left" Margin="145,88,0,0" PreviewTextInput="txtScontact_PreviewTextInput"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="32"/>
+        <TextBox x:Name="txtSaddress" HorizontalAlignment="Left" Margin="145,167,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="65"/>
         <DataGrid x:Name="DataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="288,67,18,45"/>
         <Button  Background="#607D8B" x:Name="AddSuppBtn" Content="ADD" HorizontalAlignment="Left" Margin="20,345,0,0" VerticalAlignment="Top" Height="40" Width="65" Click="AddSuppBtn_Click"/>
         <Button  Background="#607D8B" x:Name="UpdateSuppBtn" Content="UPDATE" HorizontalAlignment="Left" Margin="90,345,0,0" VerticalAlignment="Top" Height="40" Width="85" Click="UpdateSuppBtn_Click"/>

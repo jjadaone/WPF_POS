@@ -31,12 +31,12 @@ namespace WPF_POS.Pages
             CBSName_combo();
         }
         
-        SqlConnection con = new SqlConnection(@"Data Source=(localdb)\ProjectModels;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-        //SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        //SqlConnection con = new SqlConnection(@"Data Source=(localdb)\ProjectModels;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        SqlConnection con = new SqlConnection(@"Data Source=localhost;Initial Catalog=pos;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
         public void loadData()
         {
-            SqlCommand cmd = new SqlCommand("SELECT * FROM tblpurchaseorder", con);
+            SqlCommand cmd = new SqlCommand("SELECT purchase_order_id AS 'ORDER ID', product_id AS 'PRODUCT', supplier_id AS 'SUPPLIER', purchase_order_quantity AS 'QUANTITY', status AS 'STATUS', order_date AS 'ORDER DATE' FROM tblpurchaseorder", con);
             DataTable dt = new DataTable();
             con.Open();
             SqlDataReader sdr = cmd.ExecuteReader();
@@ -48,7 +48,6 @@ namespace WPF_POS.Pages
         {
 
             txtOrderQuantity.Clear();
-            txtOrderStatus.Clear();
             txtOrderTotal.Clear();
             txtProductID.Clear();
             txtSuppID.Clear();
@@ -172,7 +171,7 @@ namespace WPF_POS.Pages
 
                     string pid = dr.GetInt32(0).ToString();
                     txtProductID.Text = pid;
-                    string price = dr.GetDouble(5).ToString();
+                    string price = dr.GetDecimal(5).ToString();
                     txtPrice.Text = price;
                 }
                 con.Close();
@@ -252,14 +251,15 @@ namespace WPF_POS.Pages
         private void PriceTotalBtn_Click(object sender, RoutedEventArgs e)
         {
 
-            double answer, n1, n2;
+            double n1, answer, n2;
+
 
            double.TryParse(txtOrderQuantity.Text, out n1);
            double.TryParse(txtPrice.Text, out n2);
             answer = n1 * n2;
             if (answer > 0)
             {
-                txtOrderTotal.Text = answer.ToString("c").Remove(0,1);
+                txtOrderTotal.Text = answer.ToString();
             }
 
 

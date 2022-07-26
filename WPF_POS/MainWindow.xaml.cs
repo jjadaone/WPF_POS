@@ -78,6 +78,11 @@ namespace WPF_POS
         {
             Main.Content = new InventoryReport();
         }
+        private void btnRefundClick(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new Refund();
+        }
+
 
         private void Main_Navigated(object sender, NavigationEventArgs e)
         {
