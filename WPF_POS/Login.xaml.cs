@@ -87,18 +87,23 @@ namespace WPF_POS
         {
             con.Open();
             com.Connection = con;
-            com.CommandText = "select role from tbluser where username='" + username + "' and password='" + password + "'";
+            com.CommandText = "select role, user_id, fullname from tbluser where username='" + username + "' and password='" + password + "'";
             dr = com.ExecuteReader();
             if (dr.Read())
             {
                 if ((dr["role"]).ToString() == "Administrator" )
                 {
+                    admin.lblname.Content = (dr["fullname"]).ToString();
+                    admin.lblUserID.Content = (dr["user_id"]).ToString();
                     this.Close();
                     admin.Show();
                     return true;
                 }
                 else if ((dr["role"]).ToString() == "Cashier")
                 {
+
+                    sales.lblname.Content = (dr["fullname"]).ToString();
+                    sales.lblUserID.Content = (dr["user_id"]).ToString();
                     this.Close();
                     sales.Show();
                     return true;
