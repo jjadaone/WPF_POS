@@ -104,7 +104,10 @@ namespace WPF_POS
 
         private void exitApp_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            Login login = new Login();
+            this.Close();
+            login.Show();
+            //Application.Current.Shutdown();
         }
     }
 }

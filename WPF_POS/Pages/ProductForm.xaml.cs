@@ -347,14 +347,26 @@ namespace WPF_POS.Pages
             img = br.ReadBytes((int)fs.Length);
 
 
+            string sql = @"UPDATE tblproduct SET product_name=@product_name, product_description=@product_description, product_quantity=@product_quantity, product_price=@product_price, product_image=@product_image WHERE product_id=@product_id";
+            SqlCommand cmd = new SqlCommand(sql, con);
+
+            cmd.Parameters.AddWithValue("@category_id", txtCategoryID.Text);
+            cmd.Parameters.AddWithValue("@product_name", txtProduct.Text);
+            cmd.Parameters.AddWithValue("@product_description", txtDesc.Text);
+            cmd.Parameters.AddWithValue("@product_quantity", txtQty.Text);
+            cmd.Parameters.AddWithValue("@product_price", txtPrice.Text);
+            cmd.Parameters.AddWithValue("@product_image", img);
+            cmd.Parameters.AddWithValue("@product_id",CBPID.Text);
             con.Open();
-            SqlCommand cmd = new SqlCommand("update tblproduct set product_name = '" + txtProduct.Text + "', product_description = '" + txtDesc.Text + "', product_quantity = '" + txtQty.Text + "', product_price = '" + txtPrice.Text + "', product_image = '" + img + "' WHERE product_id = '" + CBPID.Text + "' ", con);
+           
+            //SqlCommand cmd = new SqlCommand("update tblproduct set product_name = '" + txtProduct.Text + "', product_description = '" + txtDesc.Text + "', product_quantity = '" + txtQty.Text + "', product_price = '" + txtPrice.Text + "' WHERE product_id = '" + CBPID.Text + "' ", con);
 
             try
             {
                 cmd.ExecuteNonQuery();
                 System.Windows.MessageBox.Show("Product updated successfully", "Updated", MessageBoxButton.OK, MessageBoxImage.Information);
-
+                cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
             }
             catch (SqlException ex)
             {

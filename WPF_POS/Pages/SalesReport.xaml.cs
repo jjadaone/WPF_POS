@@ -40,91 +40,7 @@ namespace WPF_POS.Pages
 
         //SELECT ifnull(sum(cash), 0) from tblpay where week(sdate)=week(now())
 
-        //private DataTable getData()
-        //{
 
-        //    DataTable dt = new DataTable();
-        //    SqlCommand cmd = new SqlCommand("SELECT * FROM tblsalesorderdetail", con);
-
-        //    SqlDataAdapter adp = new SqlDataAdapter(cmd);
-        //    adp.Fill(dt);
-        //    return dt;
-        //}
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //salesviewer.Reset();
-            //DataTable dt = getData();
-            //ReportDataSource ds = new ReportDataSource("", dt);
-            //salesviewer.LocalReport.DataSources.Add(ds);
-
-            //salesviewer.LocalReport.ReportEmbeddedResource = "";
-
-            //salesviewer.RefreshReport();
-
-        }
-
-
-
-        private void daily_Checked(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                sales.Items.Clear();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM tblsalesorderdetail WHERE day(date)=@today", con);
-                cmd.Parameters.AddWithValue("@today", DateTime.Now.Day);
-                DataTable dt = new DataTable();
-                con.Open();
-                SqlDataReader sdr = cmd.ExecuteReader();
-                dt.Load(sdr);
-                con.Close();
-                sales.ItemsSource = dt.DefaultView;
-            }
-            catch
-            {
-
-            }
-        }
-
-        private void weekly_Checked(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                sales.Items.Clear();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM tblsalesorderdetail WHERE week(date)=@week", con);
-                cmd.Parameters.AddWithValue("@week", DateTime.Today.DayOfWeek);
-                DataTable dt = new DataTable();
-                con.Open();
-                SqlDataReader sdr = cmd.ExecuteReader();
-                dt.Load(sdr);
-                con.Close();
-                sales.ItemsSource = dt.DefaultView;
-            }
-            catch
-            {
-
-            }
-        }
-
-        private void monthly_Checked(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                sales.Items.Clear();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM tblsalesorderdetail WHERE month(date)=@month", con);
-                cmd.Parameters.AddWithValue("@month", DateTime.Now.Month);
-                DataTable dt = new DataTable();
-                con.Open();
-                SqlDataReader sdr = cmd.ExecuteReader();
-                dt.Load(sdr);
-                con.Close();
-                sales.ItemsSource = dt.DefaultView;
-            }
-            catch
-            {
-
-            }
-        }
 
         private void show_Click(object sender, RoutedEventArgs e)
         {
@@ -138,7 +54,7 @@ namespace WPF_POS.Pages
                 {
                     //MessageBox.Show(toDate.ToString());
                     //SqlCommand cmd = new SqlCommand("SELECT * FROM tblsalesorderdetail WHERE date BETWEEN @from AND @to", con);
-                    SqlCommand cmd = new SqlCommand("SELECT so.sales_order_id AS INVOICE, p.product_name AS PRODUCT, sod.sales_order_detail_quantity AS QUANTITY, so.sales_order_date AS DATE, sod.sales_order_detail_price AS PRICE, sod.sales_order_detail_total AS TOTAL  FROM tblsalesorderdetail as sod INNER JOIN tblsalesorder AS so ON so.sales_order_id=sod.sales_order_id INNER JOIN tblproduct as p ON p.product_id=sod.product_id WHERE date BETWEEN @from AND @to", con);
+                    SqlCommand cmd = new SqlCommand("SELECT so.sales_order_id AS INVOICE, p.product_name AS PRODUCT, sod.sales_order_detail_quantity AS QUANTITY, so.sales_order_date AS DATE, sod.sales_order_detail_price AS PRICE, sod.sales_order_detail_total AS TOTAL  FROM tblsalesorderdetail as sod INNER JOIN tblsalesorder AS so ON so.sales_order_id=sod.sales_order_id INNER JOIN tblproduct as p ON p.product_id=sod.product_id WHERE so.sales_order_date BETWEEN @from AND @to", con);
                     cmd.Parameters.AddWithValue("@from", fromDate);
                     cmd.Parameters.AddWithValue("@to", toDate);
                     DataTable dt = new DataTable();
@@ -149,11 +65,11 @@ namespace WPF_POS.Pages
                     con.Close();
                     sales.ItemsSource = dt.DefaultView;
 
-                    cmd.CommandText = "SELECT SUM(sales_order_detail_total) as total FROM tblsalesorderdetail WHERE date BETWEEN @from AND @to";
+                    cmd.CommandText = "SELECT SUM(sales_order_detail_total) as total FROM tblsalesorderdetail INNER JOIN tblsalesorder AS so ON so.sales_order_id = tblsalesorderdetail.sales_order_id WHERE so.sales_order_date BETWEEN @from AND @to";
                     cmd.Parameters.AddWithValue("@from", fromDate);
                     cmd.Parameters.AddWithValue("@to", toDate);
                     con.Open();
-                    MessageBox.Show("out");
+                    //MessageBox.Show("out");
                     var reader = cmd.ExecuteReader();
                     int totalSales = reader.GetOrdinal("total");
                     if (!reader.Read())

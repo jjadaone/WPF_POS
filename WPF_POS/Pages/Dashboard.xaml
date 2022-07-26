@@ -35,7 +35,7 @@
 
                 <materialDesign:PackIcon Kind="KeyboardReturn" Height="70" Width="50" Canvas.Left="10" Canvas.Top="59" VerticalAlignment="Center"></materialDesign:PackIcon>
                 <Label x:Name="lblreturned" FontWeight="Black"  FontSize="30" Content="RETURNED" Canvas.Left="65" Canvas.Top="68" HorizontalAlignment="Left" VerticalAlignment="Top" Height="48" Width="310" />
-                <Label Content="Total of Items Returned" FontWeight="Medium" FontSize="20" Canvas.Left="60" Canvas.Top="125"></Label>
+                <Label Content="Total of Value Returned" FontWeight="Medium" FontSize="20" Canvas.Left="60" Canvas.Top="125"></Label>
             </Canvas>
 
         </Border>

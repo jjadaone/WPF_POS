@@ -9,14 +9,15 @@
       Title="SalesReport">
 
     <Grid>
-        <DataGrid x:Name="sales" HorizontalAlignment="Left" Height="310" VerticalAlignment="Top" Width="708" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="62,0,0,0"/>
-        <RadioButton x:Name="daily" Content="Daily" HorizontalAlignment="Left" Height="36" Margin="42,414,0,0" VerticalAlignment="Top" Width="108" Checked="daily_Checked"/>
-        <RadioButton x:Name="weekly" Content="Weekly" HorizontalAlignment="Left" Height="36" Margin="189,414,0,0" VerticalAlignment="Top" Width="108" Checked="weekly_Checked"/>
-        <RadioButton x:Name="monthly" Content="Monthly" HorizontalAlignment="Left" Height="36" Margin="308,414,0,0" VerticalAlignment="Top" Width="108" Checked="monthly_Checked"/>
-        <DatePicker x:Name="from" HorizontalAlignment="Left" Height="46" Margin="78,315,0,0" VerticalAlignment="Top" Width="130"/>
-        <DatePicker x:Name="to" HorizontalAlignment="Left" Height="46" Margin="243,315,0,0" VerticalAlignment="Top" Width="130"/>
-        <Button x:Name="show" Content="Button" HorizontalAlignment="Left" Height="46" Margin="416,315,0,0" VerticalAlignment="Top" Width="141" Click="show_Click"/>
-        <Label x:Name="total" Content="" HorizontalAlignment="Left" Height="46" Margin="582,315,0,0" VerticalAlignment="Top" Width="90"/>
+        <DataGrid x:Name="sales" HorizontalAlignment="Center" Height="260" VerticalAlignment="Top" Width="680" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,90,0,0"/>
+        <DatePicker x:Name="from" HorizontalAlignment="Left" Height="46" Margin="85,24,0,0" VerticalAlignment="Top" Width="130"/>
+        <DatePicker x:Name="to" HorizontalAlignment="Left" Height="46" Margin="325,24,0,0" VerticalAlignment="Top" Width="130"/>
+        <Button x:Name="show" Content="SUBMIT" HorizontalAlignment="Left" Height="46" Margin="515,24,0,0" VerticalAlignment="Top" Width="141" Click="show_Click"/>
+        <Label x:Name="total" Content="" HorizontalAlignment="Left" Height="35" Margin="650,376,0,0" VerticalAlignment="Top" Width="90" FontSize="20"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="575,385,0,0" TextWrapping="Wrap" Text="TOTAL" VerticalAlignment="Top" Height="33" Width="70" FontSize="20" FontWeight="Black"/>
+        <Label Content="FROM:" HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top" Height="23" Width="55"/>
+        <Label Content="TO:" HorizontalAlignment="Left" Margin="265,47,0,0" VerticalAlignment="Top" Height="23" Width="55"/>
 
 
     </Grid>

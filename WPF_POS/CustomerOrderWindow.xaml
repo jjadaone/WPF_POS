@@ -71,8 +71,9 @@
         <Button Content="Print Receipt" HorizontalAlignment="Left" Height="50" Margin="21,365,0,0" VerticalAlignment="Top" Width="124" Click="btnPrintClick" Grid.Row="1"/>
         <Button Content="Save" HorizontalAlignment="Left" Height="46" Margin="538,367,0,0" VerticalAlignment="Top" Width="89" Click="btnSaveChanges" Grid.Column="1" Grid.Row="1"/>
         <Button Content="Calculate Total" HorizontalAlignment="Left" Height="46" Margin="377,367,0,0" VerticalAlignment="Top" Width="156" Click="btnCalculateClick" Grid.Column="1" Grid.Row="1"/>
-        <Label x:Name="username" Content="Label" HorizontalAlignment="Left" Margin="21,0,0,0" VerticalAlignment="Center" Height="31" Width="142"/>
-
+        <materialDesign:PackIcon Kind="User" Height="65" Width="64" Margin="10,10,0,0"></materialDesign:PackIcon>
+        <Label x:Name="lblname" HorizontalAlignment="Left" Margin="83,0,0,0" VerticalAlignment="Center" Height="55" Width="145" FontSize="20" FontWeight="Black"/>
+        <Label x:Name="lblUserID" Visibility="Hidden"></Label>
 
     </Grid>
 </Window>

@@ -64,7 +64,7 @@ namespace WPF_POS.Pages
                 string purchase_id = row.Row.ItemArray[0].ToString();
                 string product_id = row.Row.ItemArray[2].ToString();
                 string quantity = row.Row.ItemArray[5].ToString();
-                MessageBox.Show(product_id, quantity);
+                //MessageBox.Show(product_id, quantity);
 
                 string sql = @"UPDATE tblpurchaseorder SET status=@status, received_date=@received_date WHERE purchase_order_id=@purchase_id";
                 SqlCommand cmd = new SqlCommand(sql, con);
